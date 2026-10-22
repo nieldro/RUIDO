@@ -78,12 +78,6 @@
     outline-offset: 3px;
   }
 
-  p,
-  li,
-  dd {
-    text-wrap: pretty;
-  }
-
   a {
     text-underline-offset: 0.25em;
     text-decoration-thickness: 1px;
