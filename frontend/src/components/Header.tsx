@@ -44,6 +44,11 @@ export function Header() {
       >
         {t.nav.skip}
       </a>
+      <span
+        aria-hidden="true"
+        data-progress
+        className={`pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 ${onPaper ? "bg-ink" : "bg-acid"}`}
+      />
       <div className="container-x flex h-12 items-center justify-between gap-4 text-xs sm:text-sm">
         <a href="#ruido" className="font-bold tracking-wider no-underline">
           {t.nav.logo}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 
 export function Senal() {
   const { t } = useLocale();
@@ -15,6 +16,7 @@ export function Senal() {
       aria-labelledby="senal-title"
       className="invert-section py-20 sm:py-32"
     >
+      <SectionRule ink />
       <div className="container-x">
         <h2 id="senal-title" className="display text-[clamp(3rem,21.5vw,28rem)] leading-[0.82]">
           {s.title}

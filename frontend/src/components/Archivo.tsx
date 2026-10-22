@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 import { api, apiEnabled, useApiResource, useNearViewport, type Repo } from "@/lib/api";
 import { timeAgo } from "@/lib/time";
@@ -152,6 +153,7 @@ export function Archivo() {
       aria-labelledby="archivo-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         {/* Cabecera en espejo respecto a las demás secciones: rompe el ritmo y marca el cambio a «datos en vivo». */}
         <div className="grid gap-6 lg:grid-cols-[1fr_1.35fr] lg:gap-20">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 import {
   api,
   apiEnabled,
@@ -218,6 +219,16 @@ export function Pipeline() {
           ease: "expo.out",
           scrollTrigger: { trigger: "[data-fx=intro]", start: "top 88%", toggleActions: "play none none none" },
         });
+        // Un pulso de acento recorre los nodos (Navegador → FastAPI → PostgreSQL → Panel) mientras están a la vista.
+        const pulse = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 1.4,
+          scrollTrigger: { trigger: "[data-pipeline-diagram]", start: "top bottom", end: "bottom top", toggleActions: "play pause resume pause" },
+        });
+        gsap.utils.toArray<HTMLElement>("[data-node] > div").forEach((n, i) => {
+          pulse.to(n, { borderColor: "#c6ff3d", duration: 0.2, ease: "none" }, i * 0.55).to(n, { borderColor: "#3a3833", duration: 0.4, ease: "none" }, i * 0.55 + 0.3);
+        });
+
         gsap.from("[data-node]", {
           opacity: 0,
           y: 24,
@@ -256,6 +267,7 @@ export function Pipeline() {
       aria-labelledby="pipeline-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
           <DecodeHeading id="pipeline-title" text={p.title} className="display h-section" />

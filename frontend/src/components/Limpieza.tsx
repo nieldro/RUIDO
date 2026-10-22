@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 
 export function Limpieza() {
@@ -22,13 +23,14 @@ export function Limpieza() {
           ease: "expo.out",
           scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", toggleActions: "play none none none" },
         });
-        gsap.from("[data-fx=bio] p", {
-          opacity: 0,
-          y: 16,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=bio]", start: "top 85%", toggleActions: "play none none none" },
+        // El párrafo se «enciende» palabra por palabra con el scroll: del ruido apagado a la señal.
+        // De gris apagado (#8F8A80, 5,7:1 sobre el fondo) a texto normal: el contraste nunca baja de AA,
+        // a diferencia de bajar la opacidad (al 16 % el texto sería ilegible si el visitante se detiene).
+        gsap.fromTo("[data-w]", { color: "#8f8a80" }, {
+          color: "#cfc9be",
+          stagger: 0.05,
+          ease: "none",
+          scrollTrigger: { trigger: "[data-fx=bio]", start: "top 82%", end: "bottom 50%", scrub: 0.4 },
         });
         // Las columnas se "construyen" con el scroll mientras las partículas caen y se apilan.
         gsap.from("[data-skill-col]", {
@@ -53,6 +55,7 @@ export function Limpieza() {
       aria-labelledby="limpieza-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
           <h2 id="limpieza-title" data-fx="title" className="display h-section">
@@ -60,7 +63,13 @@ export function Limpieza() {
           </h2>
           <div data-fx="bio" className="max-w-[62ch] space-y-5 pt-2 text-fg2 lg:pt-6">
             {l.bio.map((p) => (
-              <p key={p}>{p}</p>
+              <p key={p}>
+                {p.split(" ").map((w, i) => (
+                  <span key={i} data-w>
+                    {w}{" "}
+                  </span>
+                ))}
+              </p>
             ))}
           </div>
         </div>
@@ -80,7 +89,12 @@ export function Limpieza() {
               </h4>
               <ul className="space-y-1 text-[0.8125rem] leading-snug text-fg2">
                 {g.tools.map((tool) => (
-                  <li key={tool}>{tool}</li>
+                  <li
+                    key={tool}
+                    className="transition-[transform,color] duration-150 ease-[var(--ease-out)] hover:translate-x-1 hover:text-acid"
+                  >
+                    {tool}
+                  </li>
                 ))}
               </ul>
             </li>

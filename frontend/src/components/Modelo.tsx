@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 
 /* ---------- Piezas comunes ---------- */
@@ -71,11 +72,26 @@ function Node({ children, accent }: { children: React.ReactNode; accent?: boolea
 const REAL = [92, 98, 101, 95, 104, 99, 103, 100];
 const REPORTED = [236, 255, 248, 240, 262, 247, 258, 250];
 
+const CW = 480;
+const CH = 220;
+const CPAD = { l: 36, r: 8, t: 10, b: 26 };
+const CMAX = 280;
+const cx = (i: number) => CPAD.l + (i * (CW - CPAD.l - CPAD.r)) / (REAL.length - 1);
+const cy = (v: number) => CPAD.t + (1 - Math.min(Math.max(v, 0), CMAX) / CMAX) * (CH - CPAD.t - CPAD.b);
+const linePath = (a: number[]) => a.map((v, i) => `${i ? "L" : "M"}${cx(i).toFixed(1)} ${cy(v).toFixed(1)}`).join(" ");
+
+// Sacudidas fijas (determinísticas) para el estado «ruidoso» del gráfico: ±1 por punto.
+const JIT_REPORTED = [0.9, -1, 0.6, -0.8, 1, -0.5, 0.8, -0.9];
+const JIT_REAL = [-0.7, 1, -0.9, 0.8, -1, 0.7, -0.6, 0.9];
+/** Serie con ruido que se apaga cuando p → 1 (p=1 = la serie limpia). */
+export const noisySeries = (base: number[], jit: number[], amp: number, p: number) =>
+  base.map((v, i) => v + jit[i] * amp * (1 - p));
+
 function IndicatorChart({ reported, real, axis }: { reported: string; real: string; axis: string }) {
-  const W = 480;
-  const H = 220;
-  const pad = { l: 36, r: 8, t: 10, b: 26 };
-  const max = 280;
+  const W = CW;
+  const H = CH;
+  const pad = CPAD;
+  const max = CMAX;
   const x = (i: number) => pad.l + (i * (W - pad.l - pad.r)) / (REAL.length - 1);
   const y = (v: number) => pad.t + (1 - v / max) * (H - pad.t - pad.b);
   const line = (a: number[]) => a.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(" ");
@@ -96,8 +112,8 @@ function IndicatorChart({ reported, real, axis }: { reported: string; real: stri
             </text>
           </g>
         ))}
-        <path data-draw d={line(REPORTED)} fill="none" stroke="var(--fg-2)" strokeWidth="2" strokeDasharray="5 4" />
-        <path data-draw d={line(REAL)} fill="none" stroke="var(--acid)" strokeWidth="3" />
+        <path data-draw data-line="reported" d={line(REPORTED)} fill="none" stroke="var(--fg-2)" strokeWidth="2" strokeDasharray="5 4" />
+        <path data-draw data-line="real" d={line(REAL)} fill="none" stroke="var(--acid)" strokeWidth="3" />
         <text x={W - pad.r} y={y(250) - 8} textAnchor="end" fontSize="12" fill="var(--fg-2)">
           {reported} ×2.5
         </text>
@@ -250,6 +266,23 @@ export function Modelo() {
             scrollTrigger: { trigger: "[data-draw]", start: "top 80%", end: "top 40%", scrub: 0.5 },
           },
         );
+        // El gráfico pasa de ruidoso a limpio con el scroll: ambas series arrancan sacudidas y se asientan.
+        const rep = document.querySelector<SVGPathElement>("[data-line=reported]");
+        const rea = document.querySelector<SVGPathElement>("[data-line=real]");
+        if (rep && rea) {
+          const prog = { p: 0 };
+          const paint = () => {
+            rep.setAttribute("d", linePath(noisySeries(REPORTED, JIT_REPORTED, 55, prog.p)));
+            rea.setAttribute("d", linePath(noisySeries(REAL, JIT_REAL, 45, prog.p)));
+          };
+          paint();
+          gsap.to(prog, {
+            p: 1,
+            ease: "none",
+            onUpdate: paint,
+            scrollTrigger: { trigger: rep, start: "top 85%", end: "top 38%", scrub: 0.5 },
+          });
+        }
         gsap.from("[data-node]", {
           opacity: 0.2,
           stagger: 0.2,
@@ -284,6 +317,7 @@ export function Modelo() {
       aria-labelledby="modelo-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
           <h2 id="modelo-title" data-fx="title" className="display h-section">

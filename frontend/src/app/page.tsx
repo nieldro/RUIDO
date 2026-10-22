@@ -5,6 +5,9 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Analytics } from "@/components/Analytics";
 import { NoiseLayer } from "@/components/NoiseLayer";
 import { Hero } from "@/components/Hero";
+import { Marquee } from "@/components/Marquee";
+import { ScrollFx } from "@/components/ScrollFx";
+import { Cursor } from "@/components/Cursor";
 
 // Cada sección bajo el hero es su propio límite de Suspense: el HTML ya viene renderizado (SEO y sin JS),
 // pero React las hidrata una por una, cediendo el hilo entre ellas, en vez de en una sola tarea larga.
@@ -23,8 +26,11 @@ export default function Home() {
       <Analytics />
       <NoiseLayer />
       <Header />
+      <ScrollFx />
+      <Cursor />
       <main id="contenido" className="relative z-10">
         <Hero />
+        <Marquee />
         <Limpieza />
         <Historial />
         <Modelo />

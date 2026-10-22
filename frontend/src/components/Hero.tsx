@@ -18,7 +18,7 @@ export function Hero() {
       className="hero-scan relative flex min-h-svh flex-col justify-end overflow-hidden pt-24 pb-10 sm:pb-14"
     >
       <StaticNoise />
-      <div className="container-x relative flex flex-1 flex-col justify-between gap-12">
+      <div data-hero-body className="container-x relative flex flex-1 flex-col justify-between gap-12">
         <div className="max-w-xl self-end pt-6 text-right text-sm text-fg2 sm:pt-10">
           <p>{h.stack}</p>
           <p className="mt-1 text-mute">{h.place}</p>

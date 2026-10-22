@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import type { Metric } from "@/content/es";
 import { useLocale } from "@/lib/locale";
+import { SectionRule } from "./SectionRule";
 import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 import { Arrowed } from "./Arrowed";
 
@@ -121,6 +122,9 @@ export function Historial() {
           paintNumbers(row, 0);
         });
 
+        // El riel de la línea de tiempo se llena a medida que se recorre la experiencia.
+        gsap.fromTo("[data-rail]", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: "[data-fx=ol]", start: "top 70%", end: "bottom 60%", scrub: 0.4 } });
+
         gsap.from("[data-fx=ledger] dt, [data-fx=ledger] dd", {
           opacity: 0,
           y: 12,
@@ -144,6 +148,7 @@ export function Historial() {
       aria-labelledby="historial-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
           <h2 id="historial-title" data-fx="title" className="display h-section" aria-label={h.title}>
@@ -152,7 +157,10 @@ export function Historial() {
           <p className="max-w-[48ch] self-end text-fg2">{h.intro}</p>
         </div>
 
-        <ol className="mt-16 sm:mt-24">
+        <div className="relative">
+        <span aria-hidden="true" className="pointer-events-none absolute -left-2 top-0 bottom-0 w-px bg-line2 sm:-left-3" />
+        <span aria-hidden="true" data-rail className="pointer-events-none absolute -left-2 top-0 bottom-0 w-0.5 origin-top bg-acid sm:-left-3" />
+        <ol data-fx="ol" className="mt-16 sm:mt-24">
           {h.jobs.map((job) => (
             <li
               key={job.id}
@@ -187,6 +195,7 @@ export function Historial() {
             </li>
           ))}
         </ol>
+        </div>
 
         <div className="mt-8 border-t border-line2 pt-8 sm:mt-12">
           <h3 className="mb-5 text-xs text-mute">{h.ledgerTitle}</h3>

@@ -211,6 +211,17 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+/* Cinta de herramientas: Anton solo con contorno. */
+.marquee-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(143 138 128 / 0.85);
+}
+
+/* Las secciones son el ancla de su línea de acento. */
+main > section {
+  position: relative;
+}
+
 /* Cifra todavía «ruidosa» (contador de Historial a medio camino): apagada hasta resolverse. */
 [data-num][data-noisy] {
   color: var(--mute);

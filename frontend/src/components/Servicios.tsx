@@ -6,6 +6,7 @@ import { useLocale, type Locale } from "@/lib/locale";
 import { MOTION_OK, gsap, prefersReducedMotion, useGSAP, whenIdle } from "@/lib/motion";
 import { API_URL, apiEnabled } from "@/lib/api";
 import { scrollToEl } from "@/lib/scrollState";
+import { SectionRule } from "./SectionRule";
 
 type Currency = "COP" | "USD";
 type L10n = { es: string; en: string };
@@ -62,11 +63,11 @@ function ServiceRow({
           aria-controls={panelId}
           onClick={onToggle}
           data-no-press
-          className={`grid w-full gap-x-6 gap-y-3 px-0 py-5 text-left transition-colors duration-150 ease-out hover:bg-surface md:items-baseline md:px-3 ${COLS}`}
+          className={`group grid w-full gap-x-6 gap-y-3 px-0 py-5 text-left transition-colors duration-150 ease-out hover:bg-surface md:items-baseline md:px-3 ${COLS}`}
         >
           {/* Lo primero es qué recibes, en palabras llanas; el término técnico queda debajo para quien lo busca. */}
           <span>
-            <span className="block text-base leading-snug text-fg sm:text-lg">{pick(item.name, locale)}</span>
+            <span className="block text-base leading-snug text-fg transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1.5 sm:text-lg">{pick(item.name, locale)}</span>
             <span className="mt-1 block text-xs text-mute">{pick(item.tech, locale)}</span>
           </span>
 
@@ -439,6 +440,7 @@ export function Servicios() {
       aria-labelledby="servicios-title"
       className="border-t border-line py-20 sm:py-32"
     >
+      <SectionRule />
       <div className="container-x">
         <h2 id="servicios-title" data-fx="title" className="display h-section max-w-[16ch]">
           {s.title}
