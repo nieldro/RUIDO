@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useLocale } from "@/lib/locale";
 import { SectionRule } from "./SectionRule";
+import { BASE } from "@/lib/site";
 
 export function Senal() {
   const { t } = useLocale();
@@ -68,17 +69,17 @@ export function Senal() {
 
           <div className="space-y-6">
             <p className="text-lg">{s.place}</p>
-            {/* El PDF aún no existe: el botón queda inactivo y rotulado, nunca un enlace roto. */}
-            <button
-              type="button"
-              disabled
+            {/* CV público (sin teléfono) en el idioma activo. */}
+            <a
+              href={`${BASE}/${s.cvFile}`}
+              download
               aria-describedby="cv-note"
-              className="min-h-12 border border-ink bg-ink px-6 font-bold text-paper disabled:border-line-ink disabled:bg-transparent disabled:text-mute-ink"
+              className="inline-flex min-h-12 items-center border border-ink bg-ink px-6 font-bold text-paper no-underline transition-colors duration-150 ease-out hover:bg-transparent hover:text-ink"
             >
               {s.cv}
-            </button>
+            </a>
             <p id="cv-note" className="text-xs text-mute-ink">
-              {s.cvPlaceholder}
+              {s.cvNote}
             </p>
           </div>
         </div>

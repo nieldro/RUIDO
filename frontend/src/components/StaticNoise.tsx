@@ -6,12 +6,14 @@
 // Antes era un SVG con 110 <text> incrustado en el CSS: en móvil costaba ~1,2 s de layout y ~0,4 s de
 // pintado (medido con la CPU 4× más lenta). Como imagen cuesta casi nada.
 
+import { BASE } from "@/lib/site";
+
 export function StaticNoise() {
   return (
     <div
       aria-hidden="true"
       className="static-noise pointer-events-none absolute inset-0 z-0"
-      style={{ backgroundImage: "url(/static-noise.png)", backgroundSize: "cover", backgroundPosition: "center" }}
+      style={{ backgroundImage: `url(${BASE}/static-noise.png)`, backgroundSize: "cover", backgroundPosition: "center" }}
     />
   );
 }

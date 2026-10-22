@@ -55,10 +55,16 @@ Sin `NEXT_PUBLIC_API_URL` el sitio funciona igual: el panel, el log y el chat mu
 
 `npm run build` genera `frontend/out/` (HTML estático): sirve en nginx, Vercel o GitHub Pages. El backend es un contenedor (`backend/Dockerfile`) para Railway o Fly.io. Despliega **una sola instancia**: el rate limit, la caché de estadísticas y el SSE viven en memoria del proceso.
 
-Al publicar, define `NEXT_PUBLIC_SITE_URL` (el dominio real) para que la vista previa al compartir el link (Open Graph, `public/og.png`) apunte a la imagen correcta. El favicon y el ícono de Apple salen de `src/app/icon.svg` y `apple-icon.png`; hay una página 404 con el mismo estilo.
+Para GitHub Pages el sitio se compila con `NEXT_PUBLIC_BASE_PATH=/RUIDO` (ya lo hace el flujo de Actions). Al publicar, define `NEXT_PUBLIC_SITE_URL` (el dominio real) para que la vista previa al compartir el link (Open Graph, `public/og.png`) apunte a la imagen correcta. El favicon y el ícono de Apple salen de `src/app/icon.svg` y `apple-icon.png`; hay una página 404 con el mismo estilo.
 
 ## Privacidad
 No se guarda la IP en claro ni se usan cookies de terceros. El backend guarda un identificador de sesión anónimo, el país, el tipo de dispositivo y la profundidad de scroll por sección. La IP solo se usa, como hash con sal diaria, para limitar el ritmo de peticiones.
 
 ## Datos
-Todo lo que el sitio afirma sale del CV de Daniel. Los gráficos de los casos de «Modelo» son **datos sintéticos** y están rotulados así; no son datos de ninguna empresa. Lo que falta (PDF del CV, enlaces a repos y demos, flujo de n8n) queda marcado como `[PLACEHOLDER]` hasta que exista.
+Todo lo que el sitio afirma sale del CV de Daniel. Los gráficos de los casos de «Modelo» son **datos sintéticos** y están rotulados así; no son datos de ninguna empresa. Las secciones que dependen del backend (panel en vivo, repos de GitHub, chat) muestran un estado honesto de «sin conexión» hasta que el backend esté en línea. El PDF del CV del botón de descarga está en `frontend/public/cv/` y **no incluye teléfono**.
+
+## Pendiente (requiere cuentas o claves de Daniel)
+- Activar GitHub Pages: en el repo, *Settings → Pages → Source: GitHub Actions*. El flujo `.github/workflows/pages.yml` compila y publica en `https://nieldro.github.io/RUIDO/`.
+- Desplegar el backend (Railway o Fly) y guardar su URL en la variable de repositorio `API_URL`.
+- Claves del backend: `GITHUB_TOKEN` y `GITHUB_WEBHOOK_SECRET` (Archivo), `ANTHROPIC_API_KEY` (chat), `N8N_QUOTE_WEBHOOK` (cotización) y `ALLOWED_ORIGINS` con el dominio real.
+- Agregar el topic `portfolio` a los repos que quieras mostrar en «Archivo vivo».

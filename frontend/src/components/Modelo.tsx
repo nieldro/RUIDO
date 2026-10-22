@@ -447,7 +447,7 @@ export function Modelo() {
           <p className="text-fg">{m.freelance.title}</p>
           <p className="text-fg2">{m.freelance.text}</p>
         </div>
-        <p className="mt-4 text-xs text-mute">{m.linkPlaceholder}</p>
+
       </div>
     </section>
   );

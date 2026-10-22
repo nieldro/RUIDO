@@ -1,4 +1,4 @@
-// Diccionario ES (idioma por defecto). Toda cifra sale del CV de Daniel; lo que falta va como [PLACEHOLDER].
+// Diccionario ES (idioma por defecto). Toda cifra sale del CV de Daniel; no se inventa nada.
 // `en.ts` debe tener exactamente esta forma (tipo Dict).
 
 export type Metric = {
@@ -235,7 +235,7 @@ export const es = {
       title: "Freelance Marketeros",
       text: "React, Google Analytics y SQL para medir el ROI, con Looker Studio.",
     },
-    linkPlaceholder: "[PLACEHOLDER] enlace al repo o demo",
+
   },
   archivo: {
     title: "Archivo vivo",
@@ -244,7 +244,7 @@ export const es = {
     filters: "Filtrar por tecnología",
     all: "Todo",
     emptyTitle: "Sin sincronizar",
-    empty: "[PLACEHOLDER] Aún no hay repositorios con el topic portfolio ni conexión con el backend.",
+    empty: "Esta sección se conecta con GitHub cuando el backend está en línea. Mientras tanto, el código está en github.com/nieldro.",
     stars: "estrellas",
     lastCommit: "último commit",
     repo: "repo",
@@ -280,7 +280,7 @@ export const es = {
     chatText: "Un mini chat limitado a responder sobre mi experiencia. Refleja el chatbot que ya construí.",
     chatPlaceholder: "Ej.: ¿Qué hiciste en VISE?",
     chatSend: "Preguntar",
-    chatSoon: "[PLACEHOLDER] Chat pendiente de conectar al backend.",
+    chatSoon: "El chat se activa cuando el backend esté en línea.",
     chatLabel: "Pregunta sobre mi experiencia",
     chatThinking: "Pensando...",
     chatLimit: "Llegaste al límite de preguntas por hora. Vuelve más tarde.",
@@ -343,7 +343,8 @@ export const es = {
     linkedin: "linkedin.com/in/daniel-paez-torres",
     github: "github.com/nieldro",
     cv: "Descargar CV en PDF",
-    cvPlaceholder: "[PLACEHOLDER] CV en PDF pendiente",
+    cvNote: "PDF · 2 páginas · español",
+    cvFile: "cv/CV_Daniel_Paez_Analista_Datos.pdf",
     copy: "Copiar",
     copied: "Copiado",
     copyAria: "Copiar el correo al portapapeles",

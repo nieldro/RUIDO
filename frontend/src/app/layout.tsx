@@ -23,7 +23,8 @@ const DESCRIPTION =
   "Analista de datos y desarrollador en Bogotá. Python, SQL, Power BI y automatización. Saco señal del ruido.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  // Con barra final y URLs relativas ("og.png") para que funcione también bajo una subruta (/RUIDO).
+  metadataBase: new URL(SITE_URL.replace(/\/?$/, "/")),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: "ALEJO.DATA",
@@ -36,13 +37,13 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     locale: "es_CO",
     alternateLocale: ["en_US"],
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: TITLE }],
+    images: [{ url: "og.png", width: 1200, height: 630, alt: TITLE }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/og.png"],
+    images: ["og.png"],
   },
   robots: { index: true, follow: true },
 };
