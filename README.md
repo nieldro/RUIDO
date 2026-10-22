@@ -55,6 +55,8 @@ Sin `NEXT_PUBLIC_API_URL` el sitio funciona igual: el panel, el log y el chat mu
 
 `npm run build` genera `frontend/out/` (HTML estático): sirve en nginx, Vercel o GitHub Pages. El backend es un contenedor (`backend/Dockerfile`) para Railway o Fly.io. Despliega **una sola instancia**: el rate limit, la caché de estadísticas y el SSE viven en memoria del proceso.
 
+Al publicar, define NEXT_PUBLIC_SITE_URL (el dominio real) para que la vista previa al compartir el link (Open Graph, public/og.png) apunte a la imagen correcta. El favicon y el ícono de Apple salen de src/app/icon.svg y pple-icon.png; hay una página 404 con el mismo estilo.
+
 ## Privacidad
 No se guarda la IP en claro ni se usan cookies de terceros. El backend guarda un identificador de sesión anónimo, el país, el tipo de dispositivo y la profundidad de scroll por sección. La IP solo se usa, como hash con sal diaria, para limitar el ritmo de peticiones.
 

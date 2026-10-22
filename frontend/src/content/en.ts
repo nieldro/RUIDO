@@ -325,6 +325,9 @@ export const en: Dict = {
     github: "github.com/nieldro",
     cv: "Download CV (PDF)",
     cvPlaceholder: "[PLACEHOLDER] CV PDF pending",
+    copy: "Copy",
+    copied: "Copied",
+    copyAria: "Copy the email to the clipboard",
     end: "Clean signal. Thanks for reading.",
   },
 };

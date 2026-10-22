@@ -344,6 +344,9 @@ export const es = {
     github: "github.com/nieldro",
     cv: "Descargar CV en PDF",
     cvPlaceholder: "[PLACEHOLDER] CV en PDF pendiente",
+    copy: "Copiar",
+    copied: "Copiado",
+    copyAria: "Copiar el correo al portapapeles",
     end: "Señal limpia. Gracias por leer.",
   },
 };
