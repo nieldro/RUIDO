@@ -43,7 +43,7 @@ export function TypeLog({ lines, label }: { lines: string[]; label: string }) {
           </span>
           <span>
             {Array.from(line).map((ch, j) => (
-              <span key={j} data-c className="whitespace-pre">
+              <span key={j} data-c>
                 {ch}
               </span>
             ))}

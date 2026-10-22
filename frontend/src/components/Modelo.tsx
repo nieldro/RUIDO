@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useLocale } from "@/lib/locale";
-import { MOTION_OK, gsap, useGSAP } from "@/lib/motion";
+import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 
 /* ---------- Piezas comunes ---------- */
 
@@ -214,7 +214,8 @@ export function Modelo() {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (_ctx, contextSafe) => {
+      const setup = contextSafe!(() => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         // Título: se descubre de abajo hacia arriba (Limpieza lo hace al revés).
@@ -223,7 +224,7 @@ export function Modelo() {
           yPercent: -14,
           duration: 1,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", once: true },
+          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", toggleActions: "play none none none" },
         });
 
         // Las tarjetas llegan rotadas y se enderezan con el scroll.
@@ -269,6 +270,8 @@ export function Modelo() {
           scrollTrigger: { trigger: "[data-kpi]", start: "top 92%", end: "top 62%", scrub: 0.5 },
         });
       });
+      });
+      return whenIdle(setup);
     },
     { scope: root, dependencies: [], revertOnUpdate: true },
   );

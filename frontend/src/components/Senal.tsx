@@ -5,7 +5,8 @@ import { useLocale } from "@/lib/locale";
 export function Senal() {
   const { t } = useLocale();
   const s = t.senal;
-  const link = "block border-t border-ink py-4 text-lg no-underline hover:bg-ink hover:text-paper sm:text-xl";
+  const link =
+    "block border-t border-ink py-4 text-lg no-underline transition-colors duration-150 ease-out hover:bg-ink hover:text-paper sm:text-xl";
 
   return (
     <section

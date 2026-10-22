@@ -1,0 +1,55 @@
+ INFO  Accepting connections at http://localhost:3101
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 140 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 26 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/11j_8-pjpvvnk.css
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/media/9e9f04e3c37952ab-s.p.0pan85mumqyf3.woff2
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/19wg2q9r2_sev.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/1c0mhc5ebbn3y.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/2khxl0v1q4i6n.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/turbopack-3-ry682tkyiqk.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 97 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 103 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 101 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/0umf92h1sb77c.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 102 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 125 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/0-goor2yf-moo.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/42b869kl6u3-2.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 GET /_next/static/chunks/1c12qeyskyl0r.js
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 66 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 151 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 277 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 136 ms
+ HTTP  22/10/2026 12:39:10 p. m. ::1 Returned 200 in 180 ms
+ HTTP  22/10/2026 12:39:11 p. m. ::1 GET /favicon.ico?favicon.117ezoe8m31dk.ico
+ HTTP  22/10/2026 12:39:11 p. m. ::1 Returned 200 in 9 ms
+ HTTP  22/10/2026 12:39:13 p. m. ::1 GET /_next/static/chunks/0923to6m98970.js
+ HTTP  22/10/2026 12:39:13 p. m. ::1 Returned 200 in 111 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 3 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 2 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/11j_8-pjpvvnk.css
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/media/9e9f04e3c37952ab-s.p.0pan85mumqyf3.woff2
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 3 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 4 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/19wg2q9r2_sev.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/1c0mhc5ebbn3y.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/2khxl0v1q4i6n.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 6 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 6 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/turbopack-3-ry682tkyiqk.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 6 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/0umf92h1sb77c.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 4 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 3 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/0-goor2yf-moo.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 1 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/42b869kl6u3-2.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 10 ms
+ HTTP  22/10/2026 12:39:17 p. m. ::1 GET /_next/static/chunks/1c12qeyskyl0r.js
+ HTTP  22/10/2026 12:39:17 p. m. ::1 Returned 200 in 3 ms
+ HTTP  22/10/2026 12:39:18 p. m. ::1 GET /favicon.ico?favicon.117ezoe8m31dk.ico
+ HTTP  22/10/2026 12:39:18 p. m. ::1 Returned 200 in 2 ms

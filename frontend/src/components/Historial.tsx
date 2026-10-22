@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import type { Metric } from "@/content/es";
 import { useLocale } from "@/lib/locale";
-import { MOTION_OK, gsap, useGSAP } from "@/lib/motion";
+import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 import { Arrowed } from "./Arrowed";
 
 function MetricRow({ m }: { m: Metric }) {
@@ -78,18 +78,19 @@ export function Historial() {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (_ctx, contextSafe) => {
+      const setup = contextSafe!(() => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         gsap.from("[data-fx=title]", {
           clipPath: "inset(0 100% 0 0)",
           duration: 1.1,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", once: true },
+          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", toggleActions: "play none none none" },
         });
 
         gsap.utils.toArray<HTMLElement>("[data-job]").forEach((job) => {
-          const tl = gsap.timeline({ scrollTrigger: { trigger: job, start: "top 82%", once: true } });
+          const tl = gsap.timeline({ scrollTrigger: { trigger: job, start: "top 82%", toggleActions: "play none none none" } });
           tl.from(job.querySelector("[data-job-head]"), { opacity: 0, x: -24, duration: 0.8, ease: "expo.out" })
             .from(job.querySelector("[data-job-body]"), { opacity: 0, y: 28, duration: 0.8, ease: "expo.out" }, 0.08);
         });
@@ -119,9 +120,11 @@ export function Historial() {
           duration: 0.6,
           stagger: 0.06,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=ledger]", start: "top 88%", once: true },
+          scrollTrigger: { trigger: "[data-fx=ledger]", start: "top 88%", toggleActions: "play none none none" },
         });
       });
+      });
+      return whenIdle(setup);
     },
     { scope: root, dependencies: [], revertOnUpdate: true },
   );

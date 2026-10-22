@@ -1,18 +1,61 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/lib/locale";
-import { api, apiEnabled, ApiError, useApiResource, useStream, type StreamLine, type Stats } from "@/lib/api";
-import { DESKTOP, MOTION_OK, gsap, useGSAP } from "@/lib/motion";
+import {
+  api,
+  apiEnabled,
+  ApiError,
+  useApiResource,
+  useNearViewport,
+  useStream,
+  type StreamLine,
+  type Stats,
+} from "@/lib/api";
+import { DESKTOP, MOTION_OK, gsap, prefersReducedMotion, useGSAP, whenIdle } from "@/lib/motion";
 import { SECTION_IDS } from "@/lib/scrollState";
 import { DecodeHeading } from "./DecodeHeading";
+
+/** Número que sube hasta su valor con ease-out fuerte cuando llega o cambia el dato. */
+function CountUp({ value }: { value: number }) {
+  const { locale } = useLocale();
+  const ref = useRef<HTMLSpanElement>(null);
+  const shown = useRef(0);
+  const nf = new Intl.NumberFormat(locale);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fmt = new Intl.NumberFormat(locale);
+    if (prefersReducedMotion()) {
+      el.textContent = fmt.format(value);
+      shown.current = value;
+      return;
+    }
+    const o = { v: shown.current };
+    const tween = gsap.to(o, {
+      v: value,
+      duration: 0.9,
+      ease: "expo.out",
+      onUpdate: () => {
+        shown.current = o.v;
+        el.textContent = fmt.format(Math.round(o.v));
+      },
+    });
+    return () => {
+      tween.kill();
+    };
+  }, [value, locale]);
+
+  return <span ref={ref}>{nf.format(value)}</span>;
+}
 
 function Panel({ stats, offline }: { stats: Stats | null; offline: boolean }) {
   const { t } = useLocale();
   const p = t.pipeline;
   const countries = stats?.countries ?? [];
-  const visits = stats ? String(stats.visits_today) : "—";
-  const places = stats ? String(countries.length) : "—";
+  const visits = stats ? <CountUp value={stats.visits_today} /> : "—";
+  const places = stats ? <CountUp value={countries.length} /> : "—";
 
   return (
     <div className="grid gap-8 p-5 sm:grid-cols-2 sm:p-7">
@@ -106,7 +149,7 @@ function AskCv() {
       {turns.length > 0 && (
         <ul className="mt-5 space-y-4 text-sm" aria-live="polite">
           {turns.map((turn, i) => (
-            <li key={i} className="space-y-1">
+            <li key={i} className="fade-in space-y-1">
               <p className="text-mute">
                 {p.chatYou}: <span className="text-fg2">{turn.q}</span>
               </p>
@@ -153,14 +196,17 @@ export function Pipeline() {
   const { t } = useLocale();
   const p = t.pipeline;
   const root = useRef<HTMLElement>(null);
-  const { data: stats, status } = useApiResource(api.stats, 15000);
-  const { lines, connected } = useStream(8);
+  // Estadísticas y stream en vivo solo empiezan cuando la sección se acerca (no al cargar la página).
+  const near = useNearViewport(root);
+  const { data: stats, status } = useApiResource(api.stats, 15000, near);
+  const { lines, connected } = useStream(8, near);
 
   const state = !apiEnabled ? "off" : status === "ok" || connected ? "ok" : status === "loading" ? "loading" : "error";
   const statusLabel = state === "ok" ? p.statusLive : state === "loading" ? p.statusConnecting : p.statusOffline;
 
   useGSAP(
-    () => {
+    (_ctx, contextSafe) => {
+      const setup = contextSafe!(() => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         gsap.from("[data-fx=intro]", {
@@ -168,7 +214,7 @@ export function Pipeline() {
           y: 16,
           duration: 0.8,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=intro]", start: "top 88%", once: true },
+          scrollTrigger: { trigger: "[data-fx=intro]", start: "top 88%", toggleActions: "play none none none" },
         });
         gsap.from("[data-node]", {
           opacity: 0,
@@ -176,7 +222,7 @@ export function Pipeline() {
           stagger: 0.12,
           duration: 0.7,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-pipeline-diagram]", start: "top 85%", once: true },
+          scrollTrigger: { trigger: "[data-pipeline-diagram]", start: "top 85%", toggleActions: "play none none none" },
         });
       });
       // Paquetes que viajan por el diagrama; solo en horizontal y solo mientras está a la vista.
@@ -194,6 +240,8 @@ export function Pipeline() {
             .to(el, { opacity: 0, duration: 0.25, ease: "none" }, 2.85);
         });
       });
+      });
+      return whenIdle(setup);
     },
     { scope: root, dependencies: [], revertOnUpdate: true },
   );
@@ -273,7 +321,7 @@ export function Pipeline() {
                   </li>
                 )}
                 {lines.map((l) => (
-                  <li key={l.id} className="text-fg2">
+                  <li key={l.id} className="fade-in text-fg2">
                     <span className="text-acid" aria-hidden="true">
                       &gt;{" "}
                     </span>

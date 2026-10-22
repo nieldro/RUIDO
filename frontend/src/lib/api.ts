@@ -90,13 +90,43 @@ export const api = {
     request<{ answer: string }>("/api/ask", { method: "POST", body: JSON.stringify({ question }) }, 30000),
 };
 
-/** Carga un recurso al montar y lo refresca cada `everyMs` (0 = una sola vez). */
-export function useApiResource<T>(load: () => Promise<T>, everyMs = 0) {
+/**
+ * true cuando el elemento se acerca al viewport (y se queda en true). Sirve para no abrir conexiones
+ * ni pedir datos de una sección lejana al cargar la página: un SSE abierto impide que la red quede
+ * inactiva, y eso estropea la medición de rendimiento.
+ */
+export function useNearViewport(ref: React.RefObject<Element | null>, margin = "600px") {
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Navegador sin IntersectionObserver: se activa de inmediato (en un callback, no en el efecto).
+      const t = window.setTimeout(() => setNear(true), 0);
+      return () => window.clearTimeout(t);
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: margin },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref, margin, near]);
+  return near;
+}
+
+/** Carga un recurso cuando `enabled` es true y lo refresca cada `everyMs` (0 = una sola vez). */
+export function useApiResource<T>(load: () => Promise<T>, everyMs = 0, enabled = true) {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<ApiStatus>(apiEnabled ? "loading" : "off");
 
   useEffect(() => {
-    if (!apiEnabled) return;
+    if (!apiEnabled || !enabled) return;
     let alive = true;
     const run = () =>
       load()
@@ -116,7 +146,7 @@ export function useApiResource<T>(load: () => Promise<T>, everyMs = 0) {
     };
     // `load` es una función estable del módulo `api`.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [everyMs]);
+  }, [everyMs, enabled]);
 
   return { data, status };
 }
@@ -126,12 +156,12 @@ export type StreamLine =
   | { id: number; kind: "event"; section: string; depth: number; ts: string };
 
 /** Eventos anónimos en vivo (SSE). Mantiene las últimas `max` líneas. */
-export function useStream(max = 8) {
+export function useStream(max = 8, enabled = true) {
   const [lines, setLines] = useState<StreamLine[]>([]);
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    if (!apiEnabled || typeof EventSource === "undefined") return;
+    if (!apiEnabled || !enabled || typeof EventSource === "undefined") return;
     let seq = 0;
     const es = new EventSource(`${API_URL}/api/stream`);
     es.onopen = () => setConnected(true);
@@ -154,7 +184,7 @@ export function useStream(max = 8) {
       }
     });
     return () => es.close();
-  }, [max]);
+  }, [max, enabled]);
 
   return { lines, connected };
 }

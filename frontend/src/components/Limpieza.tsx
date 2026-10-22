@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useLocale } from "@/lib/locale";
-import { MOTION_OK, gsap, useGSAP } from "@/lib/motion";
+import { MOTION_OK, gsap, useGSAP, whenIdle } from "@/lib/motion";
 
 export function Limpieza() {
   const { t } = useLocale();
@@ -10,7 +10,8 @@ export function Limpieza() {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (_ctx, contextSafe) => {
+      const setup = contextSafe!(() => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         // El título entra tapado por arriba y sube: una sola vez.
@@ -19,7 +20,7 @@ export function Limpieza() {
           yPercent: 18,
           duration: 1,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", once: true },
+          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", toggleActions: "play none none none" },
         });
         gsap.from("[data-fx=bio] p", {
           opacity: 0,
@@ -27,7 +28,7 @@ export function Limpieza() {
           duration: 0.7,
           stagger: 0.1,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-fx=bio]", start: "top 85%", once: true },
+          scrollTrigger: { trigger: "[data-fx=bio]", start: "top 85%", toggleActions: "play none none none" },
         });
         // Las columnas se "construyen" con el scroll mientras las partículas caen y se apilan.
         gsap.from("[data-skill-col]", {
@@ -38,6 +39,8 @@ export function Limpieza() {
           scrollTrigger: { trigger: "[data-fx=cols]", start: "top 92%", end: "top 42%", scrub: 0.6 },
         });
       });
+      });
+      return whenIdle(setup);
     },
     { scope: root, dependencies: [], revertOnUpdate: true },
   );

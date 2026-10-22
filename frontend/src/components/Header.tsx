@@ -31,11 +31,13 @@ export function Header() {
     return () => gsap.ticker.remove(tick);
   }, []);
 
-  const tone = onPaper ? "text-ink border-line-ink bg-paper" : "text-fg border-line bg-bg";
+  const tone = `transition-colors duration-200 ease-out ${
+    onPaper ? "text-ink border-line-ink bg-paper" : "text-fg border-line bg-bg"
+  }`;
   const muted = onPaper ? "text-mute-ink" : "text-mute";
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b ${tone}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 border-b pt-[env(safe-area-inset-top)] ${tone}`}>
       <a
         href="#contenido"
         className="sr-only-focusable fixed top-2 left-2 z-[60] bg-acid px-3 py-2 font-bold text-bg"

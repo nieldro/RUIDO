@@ -1,13 +1,25 @@
 {
-  "_nota": "Precios de referencia (desde). Edita este archivo sin tocar código. copPerUsd es una tasa de referencia, no la TRM del día.",
+  "_nota": "Precios de referencia (desde), en COP. Edita este archivo sin tocar código. copPerUsd es una tasa de referencia, no la TRM del día. `name` va en lenguaje llano; `tech` es el término técnico para quien lo busca.",
   "copPerUsd": 4000,
+  "groups": [
+    { "id": "find", "name": { "es": "Que te encuentren y te compren", "en": "Get found and get paid" } },
+    { "id": "serve", "name": { "es": "Atender más rápido", "en": "Answer faster" } },
+    { "id": "auto", "name": { "es": "Que el trabajo repetitivo se haga solo", "en": "Let repetitive work run itself" } },
+    { "id": "numbers", "name": { "es": "Entender tus números", "en": "Understand your numbers" } },
+    { "id": "grow", "name": { "es": "Anunciarte y diseñar", "en": "Advertise and design" } }
+  ],
   "items": [
     {
       "id": "landing",
-      "category": { "es": "Web", "en": "Web" },
-      "name": { "es": "Landing page (1 página, formulario, SEO básico)", "en": "Landing page (1 page, form, basic SEO)" },
+      "group": "find",
+      "name": {
+        "es": "Una página web de una pantalla para tu negocio, con formulario de contacto y lista para que te encuentren en Google",
+        "en": "A one-page website for your business, with a contact form and set up to be found on Google"
+      },
+      "tech": { "es": "Landing page · SEO básico", "en": "Landing page · basic SEO" },
       "price": 900000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "1 semana", "en": "1 week" },
       "includes": {
         "es": ["Diseño y desarrollo de una página", "Formulario de contacto y SEO básico"],
@@ -21,34 +33,44 @@
     },
     {
       "id": "corporativo",
-      "category": { "es": "Web", "en": "Web" },
-      "name": { "es": "Sitio web corporativo (5–8 secciones, CMS)", "en": "Corporate website (5–8 sections, CMS)" },
+      "group": "find",
+      "name": {
+        "es": "Sitio web de 5 a 8 secciones que tú mismo puedes editar",
+        "en": "A 5–8 section website you can edit yourself"
+      },
+      "tech": { "es": "Sitio corporativo · CMS", "en": "Corporate site · CMS" },
       "price": 1800000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "2–3 semanas", "en": "2–3 weeks" },
       "includes": {
-        "es": ["Sitio de 5 a 8 secciones", "CMS para editar el contenido"],
-        "en": ["Site with 5 to 8 sections", "CMS to edit the content"]
+        "es": ["Sitio de 5 a 8 secciones", "Un panel para editar el contenido sin programar"],
+        "en": ["Site with 5 to 8 sections", "A panel to edit content without coding"]
       },
       "excludes": {
         "es": ["Redacción de contenidos", "Hosting y dominio"],
         "en": ["Content writing", "Hosting and domain"]
       },
       "example": {
-        "es": "Sitio web corporativo de Mueblimaquinas, donde fui Web Master.",
+        "es": "El sitio web corporativo de Mueblimaquinas, donde fui Web Master.",
         "en": "Mueblimaquinas' corporate website, where I was Web Master."
       }
     },
     {
       "id": "tienda",
-      "category": { "es": "Web", "en": "Web" },
-      "name": { "es": "Tienda online (Shopify, WooCommerce o a medida, pagos)", "en": "Online store (Shopify, WooCommerce or custom, payments)" },
+      "group": "find",
+      "name": {
+        "es": "Tienda en internet con catálogo, carrito y pagos",
+        "en": "An online store with catalog, cart and payments"
+      },
+      "tech": { "es": "Shopify, WooCommerce o a medida", "en": "Shopify, WooCommerce or custom" },
       "price": 3500000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "3–5 semanas", "en": "3–5 weeks" },
       "includes": {
-        "es": ["Catálogo y carrito", "Integración de pagos"],
-        "en": ["Catalog and cart", "Payments integration"]
+        "es": ["Catálogo y carrito", "Cobro con tarjeta y otros medios de pago"],
+        "en": ["Catalog and cart", "Card and other payment methods"]
       },
       "excludes": {
         "es": ["Fotografía de producto", "Comisiones de la pasarela de pago"],
@@ -58,54 +80,69 @@
     },
     {
       "id": "medida",
-      "category": { "es": "Web", "en": "Web" },
-      "name": { "es": "Desarrollo a medida (web app, API, panel admin)", "en": "Custom development (web app, API, admin panel)" },
+      "group": "find",
+      "name": {
+        "es": "Aplicación o sistema web hecho a tu medida",
+        "en": "A custom web app or system built for you"
+      },
+      "tech": { "es": "Web app · API · panel de administración", "en": "Web app · API · admin panel" },
       "price": null,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "según alcance", "en": "depends on scope" },
       "includes": {
-        "es": ["Levantamiento de requisitos", "Aplicación o API con su base de datos"],
-        "en": ["Requirements gathering", "App or API with its database"]
+        "es": ["Levantamiento de lo que necesitas", "Aplicación con su base de datos"],
+        "en": ["Requirements gathering", "App with its database"]
       },
       "excludes": {
         "es": ["Mantenimiento posterior (se cotiza aparte)"],
         "en": ["Ongoing maintenance (quoted separately)"]
       },
       "example": {
-        "es": "Este mismo sitio: frontend en Next.js y backend en FastAPI con PostgreSQL.",
-        "en": "This very site: a Next.js frontend and a FastAPI backend with PostgreSQL."
+        "es": "Este mismo sitio: la web en Next.js y un servidor propio en FastAPI con base de datos.",
+        "en": "This very site: a Next.js frontend and its own FastAPI server with a database."
       }
     },
     {
       "id": "chatbot",
-      "category": { "es": "IA", "en": "AI" },
-      "name": { "es": "Chatbot con IA para WhatsApp o web, con tus datos", "en": "AI chatbot for WhatsApp or web, using your data" },
+      "group": "serve",
+      "name": {
+        "es": "Asistente que responde a tus clientes por WhatsApp o web con la información de tu negocio",
+        "en": "An assistant that answers your customers on WhatsApp or web using your business information"
+      },
+      "tech": { "es": "Chatbot con IA", "en": "AI chatbot" },
       "price": 1500000,
       "priceSuffix": { "es": "+ mensual", "en": "+ monthly" },
+      "recurring": true,
       "delivery": { "es": "2 semanas", "en": "2 weeks" },
       "includes": {
-        "es": ["Chatbot que responde con tus propios datos", "Puesta en marcha en el canal elegido"],
-        "en": ["Chatbot that answers using your own data", "Launch on the channel you choose"]
+        "es": ["Asistente que responde con tus propios datos", "Puesta en marcha en el canal que elijas"],
+        "en": ["Assistant that answers using your own data", "Launch on the channel you choose"]
       },
       "excludes": {
         "es": ["Costo del consumo de la IA (se cobra aparte)"],
         "en": ["AI usage costs (billed separately)"]
       },
       "example": {
-        "es": "Chatbot con Azure OpenAI, LangChain y Prompt Flow sobre datos reales (Supernumerarios SAS).",
-        "en": "Chatbot with Azure OpenAI, LangChain and Prompt Flow over real data (Supernumerarios SAS)."
+        "es": "Un asistente que responde con datos reales de una empresa (Azure OpenAI, LangChain y Prompt Flow), en Supernumerarios SAS.",
+        "en": "An assistant that answers using a company's real data (Azure OpenAI, LangChain and Prompt Flow), at Supernumerarios SAS."
       }
     },
     {
       "id": "n8n-flujo",
-      "category": { "es": "Automatización", "en": "Automation" },
-      "name": { "es": "Flujo de automatización con n8n (CRM, correos, facturas, reportes)", "en": "n8n automation flow (CRM, emails, invoices, reports)" },
+      "group": "auto",
+      "name": {
+        "es": "Una tarea repetitiva que se hace sola (correos, facturas, reportes)",
+        "en": "One repetitive task that runs by itself (emails, invoices, reports)"
+      },
+      "tech": { "es": "Automatización con n8n · CRM, correos, facturas, reportes", "en": "n8n automation · CRM, emails, invoices, reports" },
       "price": 600000,
-      "priceSuffix": { "es": "por flujo", "en": "per flow" },
+      "priceSuffix": { "es": "por tarea", "en": "per task" },
+      "recurring": false,
       "delivery": { "es": "3–5 días", "en": "3–5 days" },
       "includes": {
-        "es": ["Un flujo de punta a punta", "Aviso si algo falla"],
-        "en": ["One flow, end to end", "Alert if something fails"]
+        "es": ["Una tarea automatizada de punta a punta", "Aviso si algo falla"],
+        "en": ["One task automated end to end", "Alert if something fails"]
       },
       "excludes": {
         "es": ["Licencias de las herramientas conectadas"],
@@ -115,71 +152,91 @@
     },
     {
       "id": "n8n-paquete",
-      "category": { "es": "Automatización", "en": "Automation" },
-      "name": { "es": "Paquete de automatización de procesos (3+ flujos)", "en": "Process automation package (3+ flows)" },
+      "group": "auto",
+      "name": {
+        "es": "Tres o más tareas automáticas conectadas entre sí",
+        "en": "Three or more automatic tasks connected to each other"
+      },
+      "tech": { "es": "Paquete de automatización · 3+ flujos", "en": "Automation package · 3+ flows" },
       "price": 1800000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "2 semanas", "en": "2 weeks" },
       "includes": {
-        "es": ["Tres o más flujos conectados", "Documentación de cada flujo"],
-        "en": ["Three or more connected flows", "Documentation for each flow"]
+        "es": ["Tres o más tareas conectadas", "Explicación escrita de cada una"],
+        "en": ["Three or more connected tasks", "Written explanation of each one"]
       },
       "excludes": {
         "es": ["Licencias de las herramientas conectadas"],
         "en": ["Licenses for the connected tools"]
       },
       "example": {
-        "es": "Automatización con systemd y alertas por correo en VISE.",
-        "en": "Automation with systemd and email alerts at VISE."
+        "es": "Procesos que corren solos y avisan por correo si algo falla, en VISE (systemd y alertas).",
+        "en": "Processes that run on their own and email an alert if something fails, at VISE (systemd and alerts)."
       }
     },
     {
       "id": "dashboard",
-      "category": { "es": "Datos", "en": "Data" },
-      "name": { "es": "Dashboard en Power BI o Looker Studio", "en": "Power BI or Looker Studio dashboard" },
+      "group": "numbers",
+      "name": {
+        "es": "Un panel con tus números claros, para decidir sin abrir veinte hojas de cálculo",
+        "en": "A clear panel with your numbers, to decide without opening twenty spreadsheets"
+      },
+      "tech": { "es": "Dashboard en Power BI o Looker Studio", "en": "Power BI or Looker Studio dashboard" },
       "price": 1200000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "1–2 semanas", "en": "1–2 weeks" },
       "includes": {
-        "es": ["Modelo de datos y tablero", "Indicadores acordados contigo"],
-        "en": ["Data model and dashboard", "Indicators agreed with you"]
+        "es": ["Modelo de datos y panel", "Indicadores acordados contigo"],
+        "en": ["Data model and panel", "Indicators agreed with you"]
       },
       "excludes": {
-        "es": ["Licencias de Power BI", "Limpieza de datos a gran escala (ver ETL)"],
-        "en": ["Power BI licenses", "Large-scale data cleaning (see ETL)"]
+        "es": ["Licencias de Power BI", "Limpieza de datos a gran escala (ver «juntar tu información»)"],
+        "en": ["Power BI licenses", "Large-scale data cleaning (see “bring your information together”)"]
       },
       "example": {
-        "es": "Dashboard E-commerce de 13 KPIs con drill-through, y Power BI para 6 frentes de operación en VISE.",
-        "en": "E-commerce dashboard with 13 KPIs and drill-through, and Power BI for 6 operating fronts at VISE."
+        "es": "Un panel de comercio electrónico con 13 indicadores, y Power BI para 6 frentes de operación en VISE.",
+        "en": "An e-commerce panel with 13 indicators, and Power BI for 6 operating fronts at VISE."
       }
     },
     {
       "id": "etl",
-      "category": { "es": "Datos", "en": "Data" },
-      "name": { "es": "Integración de datos / ETL (unificar fuentes en una base)", "en": "Data integration / ETL (unify sources in one database)" },
+      "group": "numbers",
+      "name": {
+        "es": "Juntar en un solo lugar la información de tus sistemas y hojas de cálculo",
+        "en": "Bring the information from your systems and spreadsheets into one place"
+      },
+      "tech": { "es": "Integración de datos · ETL", "en": "Data integration · ETL" },
       "price": 2000000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "2–4 semanas", "en": "2–4 weeks" },
       "includes": {
-        "es": ["Extracción desde tus fuentes", "Base unificada con ejecución automática"],
-        "en": ["Extraction from your sources", "Unified database with automatic runs"]
+        "es": ["Traer los datos desde tus fuentes", "Una base unificada que se actualiza sola"],
+        "en": ["Pulling data from your sources", "One unified database that updates itself"]
       },
       "excludes": {
         "es": ["Costo de la base de datos en la nube"],
         "en": ["Cloud database costs"]
       },
       "example": {
-        "es": "ETL en Python que consolida Odoo, MySQL de terceros y Google Sheets en PostgreSQL (VISE).",
-        "en": "Python ETL consolidating Odoo, a third-party MySQL and Google Sheets into PostgreSQL (VISE)."
+        "es": "Un sistema que junta Odoo, una base de terceros y Google Sheets en una sola base PostgreSQL, en VISE.",
+        "en": "A system that brings Odoo, a third-party database and Google Sheets into one PostgreSQL database, at VISE."
       }
     },
     {
       "id": "ads",
-      "category": { "es": "Publicidad", "en": "Advertising" },
-      "name": { "es": "Campañas en Meta y Google Ads con medición y reporte", "en": "Meta and Google Ads campaigns with tracking and reporting" },
+      "group": "grow",
+      "name": {
+        "es": "Publicidad en Facebook, Instagram y Google, con reporte mensual",
+        "en": "Advertising on Facebook, Instagram and Google, with a monthly report"
+      },
+      "tech": { "es": "Campañas en Meta y Google Ads", "en": "Meta and Google Ads campaigns" },
       "price": 800000,
       "priceSuffix": { "es": "al mes", "en": "per month" },
-      "delivery": { "es": "mensual", "en": "monthly" },
+      "recurring": true,
+      "delivery": { "es": "se renueva cada mes", "en": "renews monthly" },
       "includes": {
         "es": ["Configuración y gestión de campañas", "Reporte mensual con medición"],
         "en": ["Campaign setup and management", "Monthly report with tracking"]
@@ -189,16 +246,21 @@
         "en": ["Ad spend (you pay the platforms directly)"]
       },
       "example": {
-        "es": "Freelance Marketeros: React, Google Analytics y SQL para medir el ROI, con Looker Studio.",
-        "en": "Freelance Marketeros: React, Google Analytics and SQL to measure ROI, with Looker Studio."
+        "es": "Freelance Marketeros: React, Google Analytics y SQL para medir el retorno de la publicidad, con Looker Studio.",
+        "en": "Freelance Marketeros: React, Google Analytics and SQL to measure ad ROI, with Looker Studio."
       }
     },
     {
       "id": "ux",
-      "category": { "es": "Diseño", "en": "Design" },
-      "name": { "es": "Diseño UI/UX de la web o app antes de desarrollar", "en": "Web or app UI/UX design before development" },
+      "group": "grow",
+      "name": {
+        "es": "Diseño de cómo se verá tu web o app, antes de construirla",
+        "en": "Design of how your site or app will look, before it's built"
+      },
+      "tech": { "es": "Diseño UI/UX", "en": "UI/UX design" },
       "price": 700000,
       "priceSuffix": null,
+      "recurring": false,
       "delivery": { "es": "1 semana", "en": "1 week" },
       "includes": {
         "es": ["Estructura y diseño de las pantallas clave"],

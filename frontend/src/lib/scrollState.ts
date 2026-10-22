@@ -32,6 +32,17 @@ export const scrollState = {
   reduced: false,
 };
 
+// Instancia de Lenis (la fija SmoothScroll) para que otros componentes hagan scroll suave coherente.
+let lenisRef: { scrollTo: (target: HTMLElement | number, opts?: { offset?: number }) => void } | null = null;
+export function setLenis(l: typeof lenisRef) {
+  lenisRef = l;
+}
+/** Lleva un elemento al inicio de la ventana; con movimiento reducido salta sin animar. */
+export function scrollToEl(el: HTMLElement, offset = -64) {
+  if (lenisRef) lenisRef.scrollTo(el, { offset });
+  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: "auto" });
+}
+
 const smooth = (x: number) => x * x * (3 - 2 * x);
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 

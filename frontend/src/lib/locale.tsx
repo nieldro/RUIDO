@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore } from "react";
 import { es, type Dict } from "@/content/es";
 import { en } from "@/content/en";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export type Locale = "es" | "en";
 
@@ -49,13 +50,26 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, [locale]);
 
   const setLocale = useCallback((l: Locale) => {
-    memory = l;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      /* almacenamiento bloqueado: el cambio no persiste */
+    const apply = () => {
+      memory = l;
+      try {
+        window.localStorage.setItem(STORAGE_KEY, l);
+      } catch {
+        /* almacenamiento bloqueado: el cambio no persiste */
+      }
+      window.dispatchEvent(new Event(EVENT));
+    };
+    if (prefersReducedMotion() || getSnapshot() === l) {
+      apply();
+      return;
     }
-    window.dispatchEvent(new Event(EVENT));
+    // Atenúa → cambia el texto en el punto medio → vuelve (ver .lang-swap en globals.css).
+    const root = document.documentElement;
+    root.classList.add("lang-swap");
+    window.setTimeout(() => {
+      apply();
+      requestAnimationFrame(() => root.classList.remove("lang-swap"));
+    }, 120);
   }, []);
 
   const value = useMemo(() => ({ locale, setLocale, t: dicts[locale] }), [locale, setLocale]);

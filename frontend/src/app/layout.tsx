@@ -4,14 +4,14 @@ import "./globals.css";
 
 const anton = Anton({
   variable: "--font-anton",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   weight: "400",
   display: "swap",
 });
 
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#0b0b0a",
   colorScheme: "dark",
+  // Ocupa también la zona del notch; el header compensa con env(safe-area-inset-*).
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

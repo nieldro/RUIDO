@@ -47,6 +47,9 @@
 /* Todo lo base va en @layer base: así las utilidades de Tailwind (text-bg, bg-acid...) siempre ganan. */
 @layer base {
   html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     background: var(--bg);
     color-scheme: dark;
     scrollbar-color: var(--line-2) var(--bg);
@@ -95,8 +98,42 @@
     border-radius: 0;
   }
 
+  /* Las animaciones de entrada (títulos que llegan desde un costado) no deben ensanchar la página.
+     `clip` no crea contenedor de scroll, así que sticky y los anclajes siguen funcionando. */
+  main {
+    overflow-x: clip;
+  }
+
   button:not(:disabled) {
     cursor: pointer;
+  }
+  /* Sin retraso de doble toque y sin seleccionar el texto de un botón al mantenerlo presionado. */
+  button,
+  a,
+  summary,
+  select {
+    touch-action: manipulation;
+  }
+  button {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Respuesta táctil de todo lo pulsable: se hunde un poco al presionar (excepto filas anchas). */
+  button {
+    transition:
+      transform 160ms var(--ease-out),
+      background-color 150ms ease,
+      color 150ms ease,
+      opacity 150ms ease;
+  }
+  button:not(:disabled):not([data-no-press]):active {
+    transform: scale(0.97);
+  }
+  a {
+    transition:
+      color 150ms ease,
+      background-color 150ms ease;
   }
 
   input::placeholder,
@@ -138,7 +175,8 @@
     width: 100%;
     max-width: 96rem;
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 3rem);
+    padding-left: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-right));
   }
 
   .sr-only-focusable:not(:focus):not(:focus-within) {
@@ -171,6 +209,33 @@
 :root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Aparición de contenido que llega después de la carga (log en vivo, chat, filtros, estados). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-in {
+  animation: fade-in 200ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* Cambio de idioma: el contenido se atenúa con un poco de desenfoque, cambia y vuelve. */
+main {
+  transition:
+    opacity 110ms ease,
+    filter 110ms ease;
+}
+.lang-swap main {
+  opacity: 0;
+  filter: blur(2px);
 }
 
 .cursor-blink {

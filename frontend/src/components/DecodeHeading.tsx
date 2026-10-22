@@ -25,11 +25,15 @@ export function DecodeHeading({
     const mm = gsap.matchMedia();
     let run: ReturnType<typeof scramble> | null = null;
     mm.add(MOTION_OK, () => {
+      // Se decodifica una sola vez. El trigger no se autodestruye (kill dentro de onEnter durante el
+      // arranque rompía ScrollTrigger.refresh al recargar con el scroll ya avanzado).
+      let played = false;
       const st = ScrollTrigger.create({
         trigger: el,
         start: "top 88%",
-        once: true,
         onEnter: () => {
+          if (played) return;
+          played = true;
           run = scramble(el, { delay: 120, stagger: 55 });
         },
       });

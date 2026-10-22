@@ -188,7 +188,9 @@ function Particles({ count }: { count: number }) {
     const k = Math.min(6, Math.floor(s));
     const t = s - k;
     const noise = st.noise / 100;
-    material.uniforms.uPx.value = gl.getPixelRatio();
+    // En pantallas chicas las partículas son más pequeñas y tenues para no competir con el texto.
+    const small = w < 768;
+    material.uniforms.uPx.value = gl.getPixelRatio() * (small ? 0.8 : 1);
 
     // Rectángulos del DOM a los que se pegan las formaciones 1, 4 y 5.
     if (s < 2.2) {
@@ -317,7 +319,7 @@ function Particles({ count }: { count: number }) {
     const R2 = R * R;
     const push = 0.25 + 0.75 * noise; // con menos ruido el mouse casi no perturba
     const jitter = noise * 9;
-    const globalA = 0.2 + 0.8 * noise;
+    const globalA = (0.2 + 0.8 * noise) * (small ? 0.7 : 1);
 
     for (let i = 0; i < count; i++) {
       form(k, i);
