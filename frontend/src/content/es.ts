@@ -33,12 +33,14 @@ export const es = {
     langLabel: "Idioma",
     noiseAria: "Nivel de ruido de la página",
     sections: ["Ruido", "Limpieza", "Historial", "Modelo", "Archivo", "Pipeline", "Servicios", "Señal"],
+    links: { services: "Servicios", contact: "Contacto" },
   },
   hero: {
     name: "DANIEL PÁEZ",
     subtitle: "Analista de datos y desarrollador. Saco señal del ruido.",
     stack: "Python · SQL · Power BI · Automatización",
     place: "Bogotá, Colombia · disponible para trabajo remoto o híbrido",
+    freelance: "También tomo proyectos freelance",
     logLabel: "Problemas reales que resolví",
     log: [
       "indicador inflado ×2.5 detectado",
@@ -64,7 +66,7 @@ export const es = {
         name: "Power BI",
         tools: ["DAX", "Power Query", "Modelo estrella", "RLS", "Looker Studio", "Tableau"],
       },
-      { name: "PostgreSQL", tools: ["PostgreSQL", "Cloud SQL"] },
+      { name: "PostgreSQL", tools: ["Cloud SQL"] },
       {
         name: "Cloud",
         tools: [
@@ -80,7 +82,7 @@ export const es = {
         tools: ["n8n", "Power Automate", "Power Apps", "systemd"],
       },
       { name: "IA", tools: ["Azure OpenAI", "LangChain", "Prompt Flow"] },
-      { name: "React", tools: ["JavaScript", "React", "APIs REST", "Git"] },
+      { name: "React", tools: ["JavaScript", "APIs REST", "Git"] },
     ],
   },
   historial: {
@@ -252,6 +254,7 @@ export const es = {
     contributionsTotal: "contribuciones en el último año",
     emptyConnected: "Todavía no hay repositorios con el topic portfolio en github.com/nieldro. Agrega el topic a un repo y aparece aquí solo.",
     loading: "Sincronizando con GitHub...",
+    emptyConnectedTitle: "Aún sin repos con el topic",
     unavailable: "GitHub no está disponible ahora mismo.",
     less: "menos",
     more: "más",
@@ -292,6 +295,7 @@ export const es = {
     logScroll: "scroll",
     sectionDepth: "promedio",
     topCountries: "Principales",
+    noGeo: "sin geolocalización",
   },
   servicios: {
     title: "Contrátame para limpiar tu caos",
@@ -305,7 +309,8 @@ export const es = {
     quote: "se cotiza según lo que necesites",
     includes: "Incluye",
     excludes: "Aparte del precio",
-    example: "Ejemplo real",
+    details: "Qué incluye",
+    example: "Trabajo relacionado",
     recurring: "Además hay un pago recurrente que acordamos antes de empezar.",
     cta: "Cotizar esto",
     unsure: "¿No sabes cuál es el tuyo? Cuéntame tu problema y te digo cuál te sirve.",

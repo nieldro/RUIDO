@@ -11,7 +11,7 @@ type Currency = "COP" | "USD";
 type L10n = { es: string; en: string };
 type Item = (typeof services.items)[number];
 
-const COLS = "md:grid-cols-[minmax(0,1fr)_13rem_9rem_1.5rem]";
+const COLS = "md:grid-cols-[minmax(0,1fr)_13rem_9rem_7rem]";
 
 function pick(v: L10n, locale: Locale) {
   return v[locale];
@@ -104,8 +104,9 @@ function ServiceRow({
               </span>
               {pick(item.delivery, locale)}
             </span>
-            <span aria-hidden="true" className="ml-auto text-lg leading-none text-acid md:ml-0 md:text-right">
-              {open ? "–" : "+"}
+            <span aria-hidden="true" className="ml-auto flex items-center justify-end gap-2 md:ml-0">
+              <span className="hidden text-xs text-mute sm:inline">{open ? "" : s.details}</span>
+              <span className="text-lg leading-none text-acid">{open ? "–" : "+"}</span>
             </span>
           </span>
         </button>
@@ -484,7 +485,7 @@ export function Servicios() {
         <ul data-rows>
           {services.groups.map((g) => (
             <li key={g.id}>
-              <h3 className="mt-8 border-b border-line2 pb-2 text-sm text-fg first:mt-0">{pick(g.name, locale)}</h3>
+              <h3 className="display mt-14 border-b border-line2 pb-3 text-2xl text-fg first:mt-0 sm:text-3xl">{pick(g.name, locale)}</h3>
               <ul>
                 {services.items
                   .filter((it) => it.group === g.id)

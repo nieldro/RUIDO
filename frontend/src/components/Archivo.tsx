@@ -225,7 +225,7 @@ export function Archivo() {
           </div>
         ) : (
           <div data-fx="status" className="mt-6 border border-line2 bg-surface p-6 sm:p-10">
-            <p className="display text-[clamp(1.75rem,3vw,2.5rem)]">{a.emptyTitle}</p>
+            <p className="display text-[clamp(1.75rem,3vw,2.5rem)]">{apiEnabled && !loading && !failed ? a.emptyConnectedTitle : a.emptyTitle}</p>
             <p className="mt-3 max-w-[60ch] text-sm text-fg2">
               {!apiEnabled
                 ? a.empty

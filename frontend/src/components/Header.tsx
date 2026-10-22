@@ -50,6 +50,15 @@ export function Header() {
         </a>
 
         <div className="flex items-center gap-4 sm:gap-8">
+          {/* Atajos para quien llega por trabajo o por una vacante; en móvil quedan en el hero. */}
+          <nav aria-label={t.nav.logo} className="hidden items-center gap-6 sm:flex">
+            <a href="#servicios" className={`no-underline hover:underline ${muted} hover:text-current`}>
+              {t.nav.links.services}
+            </a>
+            <a href="#senal" className={`no-underline hover:underline ${muted} hover:text-current`}>
+              {t.nav.links.contact}
+            </a>
+          </nav>
           <p className="tabular-nums">
             <span className="sr-only">
               {t.nav.noiseAria}: <span ref={srRef}>100%</span>
@@ -71,7 +80,7 @@ export function Header() {
                 lang={l}
                 aria-pressed={locale === l}
                 onClick={() => setLocale(l)}
-                className={`min-h-8 min-w-8 px-1.5 uppercase transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96] ${
+                className={`min-h-10 min-w-10 px-1.5 uppercase transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96] ${
                   locale === l
                     ? onPaper
                       ? "bg-ink text-paper"

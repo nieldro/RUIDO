@@ -227,7 +227,7 @@ function Particles({ count }: { count: number }) {
         case 0: {
           out.x = u0[i] * w + Math.sin(time * 0.18 + phase[i]) * 26;
           out.y = v0[i] * h + Math.cos(time * 0.15 + phase[i] * 1.3) * 26;
-          out.a = 0.55;
+          out.a = 0.42;
           break;
         }
         case 1: {
@@ -375,6 +375,13 @@ function Particles({ count }: { count: number }) {
 
 export default function NoiseCanvas() {
   const count = typeof window !== "undefined" && window.innerWidth < 768 ? 500 : 1500;
+
+  // Avisa al CSS de que el campo vivo ya está: el campo estático del hero se desvanece.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("noise-live");
+    return () => root.classList.remove("noise-live");
+  }, []);
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
       <Canvas

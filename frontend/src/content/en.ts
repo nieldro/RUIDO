@@ -14,12 +14,14 @@ export const en: Dict = {
     langLabel: "Language",
     noiseAria: "Page noise level",
     sections: ["Noise", "Cleaning", "History", "Model", "Archive", "Pipeline", "Services", "Signal"],
+    links: { services: "Services", contact: "Contact" },
   },
   hero: {
     name: "DANIEL PÁEZ",
     subtitle: "Data analyst and developer. I pull signal out of noise.",
     stack: "Python · SQL · Power BI · Automation",
     place: "Bogotá, Colombia · available for remote or hybrid work",
+    freelance: "I also take freelance projects",
     logLabel: "Real problems I solved",
     log: [
       "inflated KPI ×2.5 detected",
@@ -45,7 +47,7 @@ export const en: Dict = {
         name: "Power BI",
         tools: ["DAX", "Power Query", "Star schema", "RLS", "Looker Studio", "Tableau"],
       },
-      { name: "PostgreSQL", tools: ["PostgreSQL", "Cloud SQL"] },
+      { name: "PostgreSQL", tools: ["Cloud SQL"] },
       {
         name: "Cloud",
         tools: [
@@ -61,7 +63,7 @@ export const en: Dict = {
         tools: ["n8n", "Power Automate", "Power Apps", "systemd"],
       },
       { name: "AI", tools: ["Azure OpenAI", "LangChain", "Prompt Flow"] },
-      { name: "React", tools: ["JavaScript", "React", "REST APIs", "Git"] },
+      { name: "React", tools: ["JavaScript", "REST APIs", "Git"] },
     ],
   },
   historial: {
@@ -233,6 +235,7 @@ export const en: Dict = {
     contributionsTotal: "contributions in the last year",
     emptyConnected: "There are no repositories tagged portfolio on github.com/nieldro yet. Add the topic to a repo and it shows up here on its own.",
     loading: "Syncing with GitHub...",
+    emptyConnectedTitle: "No repos with the topic yet",
     unavailable: "GitHub isn't available right now.",
     less: "less",
     more: "more",
@@ -273,6 +276,7 @@ export const en: Dict = {
     logScroll: "scroll",
     sectionDepth: "average",
     topCountries: "Top",
+    noGeo: "no geolocation",
   },
   servicios: {
     title: "Hire me to clean up your chaos",
@@ -286,7 +290,8 @@ export const en: Dict = {
     quote: "quoted to what you need",
     includes: "Includes",
     excludes: "On top of the price",
-    example: "Real example",
+    details: "What's included",
+    example: "Related work",
     recurring: "There is also a recurring fee that we agree on before starting.",
     cta: "Get a quote for this",
     unsure: "Not sure which one is yours? Tell me your problem and I'll tell you which one fits.",

@@ -55,18 +55,25 @@ function MetricRow({ m }: { m: Metric }) {
   );
 }
 
-/** Número ruidoso: converge al valor final conforme p → 1. */
+/**
+ * Número ruidoso: converge al valor final conforme p → 1. Mientras no ha convergido se ve apagado
+ * (atenuado), nunca como un dato: si el visitante se detiene a mitad de scroll no lee una cifra falsa
+ * con el peso de una cifra real. Los porcentajes no pasan de 99 (un porcentaje real no supera 100).
+ */
 function paintNumbers(row: Element, p: number) {
   row.querySelectorAll<HTMLElement>("[data-num]").forEach((el) => {
     const original = el.dataset.text ?? "";
     if (p >= 0.995) {
       el.textContent = original;
+      el.removeAttribute("data-noisy");
       return;
     }
+    el.setAttribute("data-noisy", "");
     const comma = original.includes(",");
     const final = parseFloat(original.replace(",", "."));
     const dec = (original.split(/[.,]/)[1] ?? "").length;
-    const v = Math.max(0, final + (Math.random() - 0.5) * 2 * final * 0.9 * (1 - p));
+    let v = Math.max(0, final + (Math.random() - 0.5) * 2 * final * 0.9 * (1 - p));
+    if (el.nextSibling?.textContent?.trimStart().startsWith("%")) v = Math.min(v, 99);
     const s = v.toFixed(dec);
     el.textContent = comma ? s.replace(".", ",") : s;
   });

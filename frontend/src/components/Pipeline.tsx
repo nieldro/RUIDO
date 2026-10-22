@@ -55,7 +55,9 @@ function Panel({ stats, offline }: { stats: Stats | null; offline: boolean }) {
   const p = t.pipeline;
   const countries = stats?.countries ?? [];
   const visits = stats ? <CountUp value={stats.visits_today} /> : "—";
-  const places = stats ? <CountUp value={countries.length} /> : "—";
+  // Con visitas pero sin ningún país (sin cabecera de geolocalización) no se muestra «0»: sería un dato falso.
+  const noGeo = !!stats && stats.visits_today > 0 && countries.length === 0;
+  const places = stats && !noGeo ? <CountUp value={countries.length} /> : "—";
 
   return (
     <div className="grid gap-8 p-5 sm:grid-cols-2 sm:p-7">
@@ -63,7 +65,6 @@ function Panel({ stats, offline }: { stats: Stats | null; offline: boolean }) {
         <p className="text-xs text-mute">{p.visits}</p>
         <p
           className={`display mt-2 text-[clamp(3rem,6vw,5rem)] leading-none ${stats ? "" : "text-mute"}`}
-          aria-live="polite"
         >
           {visits}
         </p>
@@ -71,9 +72,10 @@ function Panel({ stats, offline }: { stats: Stats | null; offline: boolean }) {
       </div>
       <div>
         <p className="text-xs text-mute">{p.countries}</p>
-        <p className={`display mt-2 text-[clamp(3rem,6vw,5rem)] leading-none ${stats ? "" : "text-mute"}`}>
+        <p className={`display mt-2 text-[clamp(3rem,6vw,5rem)] leading-none ${stats && !noGeo ? "" : "text-mute"}`}>
           {places}
         </p>
+        {noGeo && <p className="mt-2 text-xs text-mute">{p.noGeo}</p>}
         {countries.length > 0 && (
           <p className="mt-2 text-xs text-fg2">
             {p.topCountries}: {countries.slice(0, 4).map((c) => `${c.country} ${c.count}`).join(" · ")}

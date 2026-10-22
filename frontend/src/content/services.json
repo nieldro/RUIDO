@@ -245,10 +245,7 @@
         "es": ["La inversión publicitaria (la pagas tú a las plataformas)"],
         "en": ["Ad spend (you pay the platforms directly)"]
       },
-      "example": {
-        "es": "Freelance Marketeros: React, Google Analytics y SQL para medir el retorno de la publicidad, con Looker Studio.",
-        "en": "Freelance Marketeros: React, Google Analytics and SQL to measure ad ROI, with Looker Studio."
-      }
+      "example": null
     },
     {
       "id": "ux",
