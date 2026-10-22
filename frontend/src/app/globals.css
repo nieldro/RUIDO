@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* Tokens del brief «Ruido → Señal». Un solo acento; el glitch solo vive en efectos. */
+:root {
+  --bg: #0b0b0a;
+  --fg: #ede8df;
+  --fg-2: #cfc9be;
+  --mute: #8f8a80;
+  --line: #2a2925;
+  --line-2: #3a3833;
+  --surface: #141412;
+  --acid: #c6ff3d;
+  --glitch-a: #ff2e88;
+  --glitch-b: #2ee6ff;
+  /* Sección final invertida: el acento no es texto y el apagado se oscurece para pasar AA */
+  --paper: #ede8df;
+  --ink: #0b0b0a;
+  --mute-ink: #5c574e;
+  --line-ink: #c9c2b4;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-fg2: var(--fg-2);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-line2: var(--line-2);
+  --color-surface: var(--surface);
+  --color-acid: var(--acid);
+  --color-glitch-a: var(--glitch-a);
+  --color-glitch-b: var(--glitch-b);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-mute-ink: var(--mute-ink);
+  --color-line-ink: var(--line-ink);
+  --font-display: var(--font-anton), "Anton", Impact, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+  --radius-*: initial;
+}
+
+/* Todo lo base va en @layer base: así las utilidades de Tailwind (text-bg, bg-acid...) siempre ganan. */
+@layer base {
+  html {
+    background: var(--bg);
+    color-scheme: dark;
+    scrollbar-color: var(--line-2) var(--bg);
+    scrollbar-width: thin;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--acid);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--acid);
+    outline-offset: 3px;
+  }
+
+  a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+    border-radius: 0;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--mute);
+    opacity: 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-2);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--mute);
+  }
+}
+
+@layer components {
+  /* Títulos: Anton siempre en mayúsculas y muy grande */
+  .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .h-section {
+    font-size: clamp(3.25rem, 11vw, 10rem);
+  }
+
+  .container-x {
+    width: 100%;
+    max-width: 96rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Sección SEÑAL: todo invertido y quieto */
+  .invert-section {
+    background: var(--paper);
+    color: var(--ink);
+    --mute: var(--mute-ink);
+    --line: var(--line-ink);
+    --line-2: var(--ink);
+  }
+  .invert-section ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .invert-section :focus-visible {
+    outline-color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

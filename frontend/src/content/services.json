@@ -1,0 +1,214 @@
+{
+  "_nota": "Precios de referencia (desde). Edita este archivo sin tocar código. copPerUsd es una tasa de referencia, no la TRM del día.",
+  "copPerUsd": 4000,
+  "items": [
+    {
+      "id": "landing",
+      "category": { "es": "Web", "en": "Web" },
+      "name": { "es": "Landing page (1 página, formulario, SEO básico)", "en": "Landing page (1 page, form, basic SEO)" },
+      "price": 900000,
+      "priceSuffix": null,
+      "delivery": { "es": "1 semana", "en": "1 week" },
+      "includes": {
+        "es": ["Diseño y desarrollo de una página", "Formulario de contacto y SEO básico"],
+        "en": ["Design and build of one page", "Contact form and basic SEO"]
+      },
+      "excludes": {
+        "es": ["Textos y fotos (los aportas tú)", "Hosting y dominio"],
+        "en": ["Copy and photos (you provide them)", "Hosting and domain"]
+      },
+      "example": null
+    },
+    {
+      "id": "corporativo",
+      "category": { "es": "Web", "en": "Web" },
+      "name": { "es": "Sitio web corporativo (5–8 secciones, CMS)", "en": "Corporate website (5–8 sections, CMS)" },
+      "price": 1800000,
+      "priceSuffix": null,
+      "delivery": { "es": "2–3 semanas", "en": "2–3 weeks" },
+      "includes": {
+        "es": ["Sitio de 5 a 8 secciones", "CMS para editar el contenido"],
+        "en": ["Site with 5 to 8 sections", "CMS to edit the content"]
+      },
+      "excludes": {
+        "es": ["Redacción de contenidos", "Hosting y dominio"],
+        "en": ["Content writing", "Hosting and domain"]
+      },
+      "example": {
+        "es": "Sitio web corporativo de Mueblimaquinas, donde fui Web Master.",
+        "en": "Mueblimaquinas' corporate website, where I was Web Master."
+      }
+    },
+    {
+      "id": "tienda",
+      "category": { "es": "Web", "en": "Web" },
+      "name": { "es": "Tienda online (Shopify, WooCommerce o a medida, pagos)", "en": "Online store (Shopify, WooCommerce or custom, payments)" },
+      "price": 3500000,
+      "priceSuffix": null,
+      "delivery": { "es": "3–5 semanas", "en": "3–5 weeks" },
+      "includes": {
+        "es": ["Catálogo y carrito", "Integración de pagos"],
+        "en": ["Catalog and cart", "Payments integration"]
+      },
+      "excludes": {
+        "es": ["Fotografía de producto", "Comisiones de la pasarela de pago"],
+        "en": ["Product photography", "Payment gateway fees"]
+      },
+      "example": null
+    },
+    {
+      "id": "medida",
+      "category": { "es": "Web", "en": "Web" },
+      "name": { "es": "Desarrollo a medida (web app, API, panel admin)", "en": "Custom development (web app, API, admin panel)" },
+      "price": null,
+      "priceSuffix": null,
+      "delivery": { "es": "según alcance", "en": "depends on scope" },
+      "includes": {
+        "es": ["Levantamiento de requisitos", "Aplicación o API con su base de datos"],
+        "en": ["Requirements gathering", "App or API with its database"]
+      },
+      "excludes": {
+        "es": ["Mantenimiento posterior (se cotiza aparte)"],
+        "en": ["Ongoing maintenance (quoted separately)"]
+      },
+      "example": {
+        "es": "Este mismo sitio: frontend en Next.js y backend en FastAPI con PostgreSQL.",
+        "en": "This very site: a Next.js frontend and a FastAPI backend with PostgreSQL."
+      }
+    },
+    {
+      "id": "chatbot",
+      "category": { "es": "IA", "en": "AI" },
+      "name": { "es": "Chatbot con IA para WhatsApp o web, con tus datos", "en": "AI chatbot for WhatsApp or web, using your data" },
+      "price": 1500000,
+      "priceSuffix": { "es": "+ mensual", "en": "+ monthly" },
+      "delivery": { "es": "2 semanas", "en": "2 weeks" },
+      "includes": {
+        "es": ["Chatbot que responde con tus propios datos", "Puesta en marcha en el canal elegido"],
+        "en": ["Chatbot that answers using your own data", "Launch on the channel you choose"]
+      },
+      "excludes": {
+        "es": ["Costo del consumo de la IA (se cobra aparte)"],
+        "en": ["AI usage costs (billed separately)"]
+      },
+      "example": {
+        "es": "Chatbot con Azure OpenAI, LangChain y Prompt Flow sobre datos reales (Supernumerarios SAS).",
+        "en": "Chatbot with Azure OpenAI, LangChain and Prompt Flow over real data (Supernumerarios SAS)."
+      }
+    },
+    {
+      "id": "n8n-flujo",
+      "category": { "es": "Automatización", "en": "Automation" },
+      "name": { "es": "Flujo de automatización con n8n (CRM, correos, facturas, reportes)", "en": "n8n automation flow (CRM, emails, invoices, reports)" },
+      "price": 600000,
+      "priceSuffix": { "es": "por flujo", "en": "per flow" },
+      "delivery": { "es": "3–5 días", "en": "3–5 days" },
+      "includes": {
+        "es": ["Un flujo de punta a punta", "Aviso si algo falla"],
+        "en": ["One flow, end to end", "Alert if something fails"]
+      },
+      "excludes": {
+        "es": ["Licencias de las herramientas conectadas"],
+        "en": ["Licenses for the connected tools"]
+      },
+      "example": null
+    },
+    {
+      "id": "n8n-paquete",
+      "category": { "es": "Automatización", "en": "Automation" },
+      "name": { "es": "Paquete de automatización de procesos (3+ flujos)", "en": "Process automation package (3+ flows)" },
+      "price": 1800000,
+      "priceSuffix": null,
+      "delivery": { "es": "2 semanas", "en": "2 weeks" },
+      "includes": {
+        "es": ["Tres o más flujos conectados", "Documentación de cada flujo"],
+        "en": ["Three or more connected flows", "Documentation for each flow"]
+      },
+      "excludes": {
+        "es": ["Licencias de las herramientas conectadas"],
+        "en": ["Licenses for the connected tools"]
+      },
+      "example": {
+        "es": "Automatización con systemd y alertas por correo en VISE.",
+        "en": "Automation with systemd and email alerts at VISE."
+      }
+    },
+    {
+      "id": "dashboard",
+      "category": { "es": "Datos", "en": "Data" },
+      "name": { "es": "Dashboard en Power BI o Looker Studio", "en": "Power BI or Looker Studio dashboard" },
+      "price": 1200000,
+      "priceSuffix": null,
+      "delivery": { "es": "1–2 semanas", "en": "1–2 weeks" },
+      "includes": {
+        "es": ["Modelo de datos y tablero", "Indicadores acordados contigo"],
+        "en": ["Data model and dashboard", "Indicators agreed with you"]
+      },
+      "excludes": {
+        "es": ["Licencias de Power BI", "Limpieza de datos a gran escala (ver ETL)"],
+        "en": ["Power BI licenses", "Large-scale data cleaning (see ETL)"]
+      },
+      "example": {
+        "es": "Dashboard E-commerce de 13 KPIs con drill-through, y Power BI para 6 frentes de operación en VISE.",
+        "en": "E-commerce dashboard with 13 KPIs and drill-through, and Power BI for 6 operating fronts at VISE."
+      }
+    },
+    {
+      "id": "etl",
+      "category": { "es": "Datos", "en": "Data" },
+      "name": { "es": "Integración de datos / ETL (unificar fuentes en una base)", "en": "Data integration / ETL (unify sources in one database)" },
+      "price": 2000000,
+      "priceSuffix": null,
+      "delivery": { "es": "2–4 semanas", "en": "2–4 weeks" },
+      "includes": {
+        "es": ["Extracción desde tus fuentes", "Base unificada con ejecución automática"],
+        "en": ["Extraction from your sources", "Unified database with automatic runs"]
+      },
+      "excludes": {
+        "es": ["Costo de la base de datos en la nube"],
+        "en": ["Cloud database costs"]
+      },
+      "example": {
+        "es": "ETL en Python que consolida Odoo, MySQL de terceros y Google Sheets en PostgreSQL (VISE).",
+        "en": "Python ETL consolidating Odoo, a third-party MySQL and Google Sheets into PostgreSQL (VISE)."
+      }
+    },
+    {
+      "id": "ads",
+      "category": { "es": "Publicidad", "en": "Advertising" },
+      "name": { "es": "Campañas en Meta y Google Ads con medición y reporte", "en": "Meta and Google Ads campaigns with tracking and reporting" },
+      "price": 800000,
+      "priceSuffix": { "es": "al mes", "en": "per month" },
+      "delivery": { "es": "mensual", "en": "monthly" },
+      "includes": {
+        "es": ["Configuración y gestión de campañas", "Reporte mensual con medición"],
+        "en": ["Campaign setup and management", "Monthly report with tracking"]
+      },
+      "excludes": {
+        "es": ["La inversión publicitaria (la pagas tú a las plataformas)"],
+        "en": ["Ad spend (you pay the platforms directly)"]
+      },
+      "example": {
+        "es": "Freelance Marketeros: React, Google Analytics y SQL para medir el ROI, con Looker Studio.",
+        "en": "Freelance Marketeros: React, Google Analytics and SQL to measure ROI, with Looker Studio."
+      }
+    },
+    {
+      "id": "ux",
+      "category": { "es": "Diseño", "en": "Design" },
+      "name": { "es": "Diseño UI/UX de la web o app antes de desarrollar", "en": "Web or app UI/UX design before development" },
+      "price": 700000,
+      "priceSuffix": null,
+      "delivery": { "es": "1 semana", "en": "1 week" },
+      "includes": {
+        "es": ["Estructura y diseño de las pantallas clave"],
+        "en": ["Structure and design of the key screens"]
+      },
+      "excludes": {
+        "es": ["Desarrollo (se cotiza aparte)"],
+        "en": ["Development (quoted separately)"]
+      },
+      "example": null
+    }
+  ]
+}
