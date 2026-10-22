@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { useLocale } from "@/lib/locale";
+import { MOTION_OK, gsap, useGSAP } from "@/lib/motion";
 
 /* ---------- Piezas comunes ---------- */
 
@@ -22,7 +24,7 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <article className={`flex min-w-0 flex-col border border-line2 bg-surface ${className}`}>
+    <article data-card className={`flex min-w-0 flex-col border border-line2 bg-surface ${className}`}>
       <header className="flex items-center justify-between gap-4 border-b border-line2 bg-bg px-4 py-2 text-xs">
         <p className="min-w-0 truncate text-fg2">
           {file} <span className="text-mute">· {shape}</span>
@@ -34,7 +36,7 @@ function Card({
           <h3 className="display text-[clamp(2rem,3.6vw,3.25rem)]">{title}</h3>
           <p className="mt-3 max-w-[56ch] text-[0.9375rem] text-fg2">{text}</p>
         </div>
-        <div className="mt-auto">{children}</div>
+        <div>{children}</div>
       </div>
     </article>
   );
@@ -53,6 +55,7 @@ function Connector() {
 function Node({ children, accent }: { children: React.ReactNode; accent?: boolean }) {
   return (
     <div
+      data-node
       className={`border px-3 py-2 text-center text-sm ${
         accent ? "border-acid text-fg" : "border-line2 text-fg2"
       }`}
@@ -93,8 +96,8 @@ function IndicatorChart({ reported, real, axis }: { reported: string; real: stri
             </text>
           </g>
         ))}
-        <path d={line(REPORTED)} fill="none" stroke="var(--fg-2)" strokeWidth="2" strokeDasharray="5 4" />
-        <path d={line(REAL)} fill="none" stroke="var(--acid)" strokeWidth="3" />
+        <path data-draw d={line(REPORTED)} fill="none" stroke="var(--fg-2)" strokeWidth="2" strokeDasharray="5 4" />
+        <path data-draw d={line(REAL)} fill="none" stroke="var(--acid)" strokeWidth="3" />
         <text x={W - pad.r} y={y(250) - 8} textAnchor="end" fontSize="12" fill="var(--fg-2)">
           {reported} ×2.5
         </text>
@@ -187,7 +190,7 @@ function InvoiceDemo({ pdf, xlsx, cols }: { pdf: string; xlsx: string; cols: str
           </thead>
           <tbody className="text-fg2">
             {INVOICES.map((r, i) => (
-              <tr key={r[0]} className={i === INVOICES.length - 1 ? "text-fg" : ""}>
+              <tr data-inv key={r[0]} className={i === INVOICES.length - 1 ? "text-fg" : ""}>
                 {r.map((c) => (
                   <td key={c} className="whitespace-nowrap px-3 py-1">
                     {c}
@@ -208,9 +211,71 @@ export function Modelo() {
   const { t } = useLocale();
   const m = t.modelo;
   const c = m.cards;
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        // Título: se descubre de abajo hacia arriba (Limpieza lo hace al revés).
+        gsap.from("[data-fx=title]", {
+          clipPath: "inset(100% 0 0 0)",
+          yPercent: -14,
+          duration: 1,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", once: true },
+        });
+
+        // Las tarjetas llegan rotadas y se enderezan con el scroll.
+        gsap.utils.toArray<HTMLElement>("[data-card]").forEach((card, i) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 70,
+            rotate: i % 2 ? 2.4 : -2.4,
+            transformOrigin: "50% 100%",
+            ease: "none",
+            scrollTrigger: { trigger: card, start: "top 94%", end: "top 58%", scrub: 0.5 },
+          });
+        });
+
+        // Gráficos que se dibujan con el scroll.
+        gsap.fromTo(
+          "[data-draw]",
+          { clipPath: "inset(0 100% 0 0)" },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            ease: "none",
+            stagger: 0.15,
+            scrollTrigger: { trigger: "[data-draw]", start: "top 80%", end: "top 40%", scrub: 0.5 },
+          },
+        );
+        gsap.from("[data-node]", {
+          opacity: 0.2,
+          stagger: 0.2,
+          ease: "none",
+          scrollTrigger: { trigger: "[data-node]", start: "top 85%", end: "bottom 45%", scrub: 0.5 },
+        });
+        gsap.from("[data-inv]", {
+          opacity: 0,
+          y: 8,
+          stagger: 0.25,
+          ease: "none",
+          scrollTrigger: { trigger: "[data-inv]", start: "top 88%", end: "bottom 55%", scrub: 0.5 },
+        });
+        gsap.from("[data-kpi]", {
+          scaleY: 0,
+          stagger: 0.06,
+          ease: "none",
+          scrollTrigger: { trigger: "[data-kpi]", start: "top 92%", end: "top 62%", scrub: 0.5 },
+        });
+      });
+    },
+    { scope: root, dependencies: [], revertOnUpdate: true },
+  );
 
   return (
     <section
+      ref={root}
       id="modelo"
       data-section="modelo"
       aria-labelledby="modelo-title"
@@ -218,7 +283,7 @@ export function Modelo() {
     >
       <div className="container-x">
         <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
-          <h2 id="modelo-title" className="display h-section">
+          <h2 id="modelo-title" data-fx="title" className="display h-section">
             {m.title}
           </h2>
           <p className="max-w-[48ch] self-end text-fg2">{m.intro}</p>
@@ -330,7 +395,8 @@ export function Modelo() {
                 {Array.from({ length: 13 }).map((_, i) => (
                   <li
                     key={i}
-                    className={`size-3.5 border sm:size-4 ${i === 12 ? "border-acid bg-acid" : "border-line2"}`}
+                    data-kpi
+                    className={`size-3.5 origin-bottom border sm:size-4 ${i === 12 ? "border-acid bg-acid" : "border-line2"}`}
                   />
                 ))}
               </ul>

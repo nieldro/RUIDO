@@ -19,17 +19,51 @@ export function Arrow({ className = "" }: { className?: string }) {
   );
 }
 
-/** Reemplaza cada «→» del texto por la flecha SVG, con un espacio fino a cada lado. */
-export function Arrowed({ text }: { text: string }) {
-  const parts = text.split("→");
+const NUM = /(\d+(?:[.,]\d+)?)/g;
+
+/** Texto con cada número envuelto en <span data-num> para poder animarlo (contador ruido → señal). */
+function Numbers({ text }: { text: string }) {
   return (
     <>
-      {parts.map((part, i) => (
-        <Fragment key={i}>
-          {i > 0 && <Arrow className="mx-[0.12em]" />}
-          {part.trim() ? (i > 0 ? part.replace(/^\s+/, "") : part.replace(/\s+$/, "")) : null}
-        </Fragment>
-      ))}
+      {text.split(NUM).map((piece, i) =>
+        i % 2 === 1 ? (
+          <span key={i} data-num data-text={piece}>
+            {piece}
+          </span>
+        ) : (
+          <Fragment key={i}>{piece}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
+
+/**
+ * Reemplaza cada «→» del texto por la flecha SVG. La flecha se pega a la palabra anterior
+ * (nowrap) para que nunca quede huérfana al inicio de una línea. Con `numbers`, los números
+ * quedan marcados con data-num para animarlos.
+ */
+export function Arrowed({ text, numbers = false }: { text: string; numbers?: boolean }) {
+  const parts = text.split("→").map((p) => p.trim());
+  const render = (s: string) => (numbers ? <Numbers text={s} /> : s);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const last = i === parts.length - 1;
+        const words = part.split(" ");
+        const tail = words.pop() ?? "";
+        const head = words.join(" ");
+        return (
+          <Fragment key={i}>
+            {head && <>{render(head)} </>}
+            <span className="whitespace-nowrap">
+              {render(tail)}
+              {!last && <Arrow className="mx-[0.12em]" />}
+            </span>
+            {!last && " "}
+          </Fragment>
+        );
+      })}
     </>
   );
 }

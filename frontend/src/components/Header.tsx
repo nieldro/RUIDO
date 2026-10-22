@@ -1,44 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { useLocale } from "@/lib/locale";
-
-// Nivel de ruido por sección. En la maqueta salta de golpe; la animación lo interpolará con el scroll.
-export const SECTION_NOISE: Record<string, number> = {
-  ruido: 100,
-  limpieza: 62,
-  historial: 45,
-  modelo: 30,
-  archivo: 20,
-  pipeline: 8,
-  servicios: 4,
-  senal: 0,
-};
+import { scrollState } from "@/lib/scrollState";
 
 export function Header() {
   const { locale, setLocale, t } = useLocale();
-  const [noise, setNoise] = useState(100);
+  const valueRef = useRef<HTMLSpanElement>(null);
+  const srRef = useRef<HTMLSpanElement>(null);
   const [onPaper, setOnPaper] = useState(false);
 
+  // El indicador lee el estado de scroll en cada tick y escribe el DOM directo: cero renders de React.
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-section]"));
-    if (!els.length) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const id = (e.target as HTMLElement).dataset.section ?? "";
-          if (id in SECTION_NOISE) {
-            setNoise(SECTION_NOISE[id]);
-            setOnPaper(id === "senal");
-          }
-        }
-      },
-      // Línea de lectura: el tercio superior de la ventana.
-      { rootMargin: "-10% 0px -80% 0px" },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    let last = -1;
+    let paper = false;
+    const tick = () => {
+      const n = Math.round(scrollState.noise);
+      if (n !== last) {
+        last = n;
+        if (valueRef.current) valueRef.current.textContent = String(n).padStart(3, " ");
+        if (srRef.current) srRef.current.textContent = `${n}%`;
+      }
+      if (scrollState.onPaper !== paper) {
+        paper = scrollState.onPaper;
+        setOnPaper(paper);
+      }
+    };
+    gsap.ticker.add(tick);
+    return () => gsap.ticker.remove(tick);
   }, []);
 
   const tone = onPaper ? "text-ink border-line-ink bg-paper" : "text-fg border-line bg-bg";
@@ -60,10 +50,14 @@ export function Header() {
         <div className="flex items-center gap-4 sm:gap-8">
           <p className="tabular-nums">
             <span className="sr-only">
-              {t.nav.noiseAria}: {noise}%
+              {t.nav.noiseAria}: <span ref={srRef}>100%</span>
             </span>
             <span aria-hidden="true">
-              [ {t.nav.noise} <span className={onPaper ? "text-ink" : "text-acid"}>{String(noise).padStart(3, " ")}%</span> ]
+              [ {t.nav.noise}{" "}
+              <span className={onPaper ? "text-ink" : "text-acid"}>
+                <span ref={valueRef}>100</span>%
+              </span>{" "}
+              ]
             </span>
           </p>
 
@@ -75,7 +69,7 @@ export function Header() {
                 lang={l}
                 aria-pressed={locale === l}
                 onClick={() => setLocale(l)}
-                className={`min-h-8 min-w-8 px-1.5 uppercase ${
+                className={`min-h-8 min-w-8 px-1.5 uppercase transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96] ${
                   locale === l
                     ? onPaper
                       ? "bg-ink text-paper"

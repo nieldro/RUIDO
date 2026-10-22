@@ -37,6 +37,11 @@
   --font-display: var(--font-anton), "Anton", Impact, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
   --radius-*: initial;
+  /* Escala de roles: etiquetas ≥13px; cuerpo 16px. Letra clara sobre fondo oscuro: más aire. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.6;
 }
 
 /* Todo lo base va en @layer base: así las utilidades de Tailwind (text-bg, bg-acid...) siempre ganan. */
@@ -52,8 +57,9 @@
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-mono);
-    font-size: 0.9375rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: 0.005em;
     font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -67,6 +73,12 @@
   :focus-visible {
     outline: 2px solid var(--acid);
     outline-offset: 3px;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
   }
 
   a {
@@ -155,7 +167,112 @@
   }
 }
 
+/* ---------- Movimiento ---------- */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.cursor-blink {
+  animation: blink 1.05s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Glitch RGB por capas: dos copias rosa/cian recortadas con clip-path. Solo viven en el hero. */
+.glitch-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: clip-path, transform;
+}
+.glitch-layer[data-c="a"] {
+  color: var(--glitch-a);
+}
+.glitch-layer[data-c="b"] {
+  color: var(--glitch-b);
+}
+.is-glitching .glitch-layer[data-c="a"] {
+  opacity: 0.95;
+  animation: glitch-a 400ms steps(1, end) both;
+}
+.is-glitching .glitch-layer[data-c="b"] {
+  opacity: 0.95;
+  animation: glitch-b 400ms steps(1, end) both;
+}
+.is-glitching .glitch-base {
+  display: inline-block;
+  animation: glitch-base 400ms steps(1, end) both;
+}
+@keyframes glitch-a {
+  0% { clip-path: inset(8% 0 78% 0); transform: translate(-0.018em, 0); }
+  15% { clip-path: inset(46% 0 30% 0); transform: translate(0.022em, 0.004em); }
+  30% { clip-path: inset(70% 0 6% 0); transform: translate(-0.012em, -0.004em); }
+  45% { clip-path: inset(20% 0 55% 0); transform: translate(0.03em, 0); }
+  60% { clip-path: inset(58% 0 22% 0); transform: translate(-0.026em, 0.006em); }
+  80% { clip-path: inset(2% 0 88% 0); transform: translate(0.01em, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+@keyframes glitch-b {
+  0% { clip-path: inset(62% 0 14% 0); transform: translate(0.02em, 0); }
+  18% { clip-path: inset(12% 0 66% 0); transform: translate(-0.026em, -0.004em); }
+  34% { clip-path: inset(40% 0 38% 0); transform: translate(0.016em, 0.006em); }
+  52% { clip-path: inset(78% 0 4% 0); transform: translate(-0.03em, 0); }
+  70% { clip-path: inset(28% 0 50% 0); transform: translate(0.024em, -0.004em); }
+  86% { clip-path: inset(52% 0 28% 0); transform: translate(-0.012em, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+@keyframes glitch-base {
+  0% { transform: translate(0.006em, 0) skewX(-2deg); }
+  25% { transform: translate(-0.008em, 0); }
+  50% { transform: translate(0.004em, 0) skewX(1.5deg); }
+  75% { transform: translate(-0.004em, 0); }
+  100% { transform: none; }
+}
+
+/* Grano y líneas de escaneo: solo en el hero */
+.hero-scan::before,
+.hero-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-scan::before {
+  inset: -50%;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 900ms steps(6) infinite;
+}
+.hero-scan::after {
+  opacity: 0.2;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.55) 2px 3px);
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .glitch-layer {
+    display: none;
+  }
+  .hero-scan::before {
+    animation: none;
+  }
+  .cursor-blink {
+    animation: none;
+  }
   html {
     scroll-behavior: auto;
   }

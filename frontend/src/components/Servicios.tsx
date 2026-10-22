@@ -1,8 +1,10 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import services from "@/content/services.json";
 import { useLocale, type Locale } from "@/lib/locale";
+import { MOTION_OK, gsap, useGSAP } from "@/lib/motion";
+import { API_URL, apiEnabled } from "@/lib/api";
 
 type Currency = "COP" | "USD";
 type L10n = { es: string; en: string };
@@ -45,7 +47,7 @@ function ServiceRow({
   const price = formatPrice(item.price, currency, locale, s.quote);
 
   return (
-    <li className="border-t border-line">
+    <li data-row className="border-t border-line">
       <h3>
         <button
           type="button"
@@ -121,14 +123,13 @@ function QuoteForm({ serviceId, onServiceChange }: { serviceId: string; onServic
     setErrors(next);
     if (next.service || next.contact) return;
 
-    const base = process.env.NEXT_PUBLIC_API_URL;
-    if (!base) {
+    if (!apiEnabled) {
       setStatus("error");
       return;
     }
     setStatus("sending");
     try {
-      const res = await fetch(`${base}/api/quote`, {
+      const res = await fetch(`${API_URL}/api/quote`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -249,6 +250,32 @@ export function Servicios() {
   const [currency, setCurrency] = useState<Currency>("COP");
   const [openId, setOpenId] = useState<string | null>(null);
   const [serviceId, setServiceId] = useState("");
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        // La consulta "se ejecuta": las filas del resultado aparecen una tras otra, una sola vez.
+        gsap.from("[data-row]", {
+          opacity: 0,
+          y: 10,
+          duration: 0.5,
+          stagger: 0.055,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-rows]", start: "top 82%", once: true },
+        });
+        gsap.from("[data-fx=title]", {
+          opacity: 0,
+          y: 24,
+          duration: 0.9,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-fx=title]", start: "top 88%", once: true },
+        });
+      });
+    },
+    { scope: root, dependencies: [], revertOnUpdate: true },
+  );
 
   function quote(id: string) {
     setServiceId(id);
@@ -257,13 +284,14 @@ export function Servicios() {
 
   return (
     <section
+      ref={root}
       id="servicios"
       data-section="servicios"
       aria-labelledby="servicios-title"
       className="border-t border-line py-20 sm:py-32"
     >
       <div className="container-x">
-        <h2 id="servicios-title" className="display h-section max-w-[16ch]">
+        <h2 id="servicios-title" data-fx="title" className="display h-section max-w-[16ch]">
           {s.title}
         </h2>
 
@@ -299,7 +327,7 @@ export function Servicios() {
           <span className="text-right">{s.cols.delivery}</span>
         </div>
 
-        <ul className="border-b border-line md:border-t-0">
+        <ul data-rows className="border-b border-line md:border-t-0">
           {services.items.map((item) => (
             <ServiceRow
               key={item.id}

@@ -15,7 +15,7 @@ export function Senal() {
       className="invert-section py-20 sm:py-32"
     >
       <div className="container-x">
-        <h2 id="senal-title" className="display text-[clamp(4.5rem,21.5vw,28rem)] leading-[0.82]">
+        <h2 id="senal-title" className="display text-[clamp(3rem,21.5vw,28rem)] leading-[0.82]">
           {s.title}
         </h2>
 
