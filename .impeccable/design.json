@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T00:00:00Z",
+  "title": "Design System: Portafolio Ruido → Señal",
+  "extensions": {
+    "colorMeta": {
+      "bg": { "role": "neutral", "displayName": "Fondo casi negro", "canonical": "#0b0b0a", "tonalRamp": ["#0b0b0a", "#141412", "#2a2925", "#3a3833", "#5c574e", "#8f8a80", "#cfc9be", "#ede8df"] },
+      "surface": { "role": "neutral", "displayName": "Superficie", "canonical": "#141412", "tonalRamp": ["#0b0b0a", "#141412", "#2a2925", "#3a3833", "#5c574e", "#8f8a80", "#cfc9be", "#ede8df"] },
+      "fg": { "role": "neutral", "displayName": "Papel calido", "canonical": "#ede8df", "tonalRamp": ["#0b0b0a", "#2a2925", "#5c574e", "#8f8a80", "#c9c2b4", "#cfc9be", "#e3ded4", "#ede8df"] },
+      "fg-2": { "role": "neutral", "displayName": "Gris calido", "canonical": "#cfc9be", "tonalRamp": ["#2a2925", "#3a3833", "#5c574e", "#8f8a80", "#a8a298", "#c9c2b4", "#cfc9be", "#ede8df"] },
+      "mute": { "role": "neutral", "displayName": "Apagado", "canonical": "#8f8a80", "tonalRamp": ["#2a2925", "#3a3833", "#5c574e", "#74706a", "#8f8a80", "#a8a298", "#cfc9be", "#ede8df"] },
+      "line": { "role": "neutral", "displayName": "Linea", "canonical": "#2a2925", "tonalRamp": ["#0b0b0a", "#141412", "#1e1d1a", "#2a2925", "#3a3833", "#5c574e", "#8f8a80", "#cfc9be"] },
+      "line-2": { "role": "neutral", "displayName": "Linea 2", "canonical": "#3a3833", "tonalRamp": ["#0b0b0a", "#141412", "#2a2925", "#3a3833", "#4a4741", "#5c574e", "#8f8a80", "#cfc9be"] },
+      "acid": { "role": "primary", "displayName": "Acido", "canonical": "#c6ff3d", "tonalRamp": ["#2b3a05", "#425a08", "#5f830c", "#80b018", "#a0d82a", "#c6ff3d", "#dcff85", "#effcc4"] },
+      "glitch-a": { "role": "secondary", "displayName": "Glitch rosa (solo efectos)", "canonical": "#ff2e88", "tonalRamp": ["#4a0a28", "#6f0f3d", "#99144f", "#c71d6a", "#ff2e88", "#ff6aa8", "#ff9fc6", "#ffd1e3"] },
+      "glitch-b": { "role": "secondary", "displayName": "Glitch cian (solo efectos)", "canonical": "#2ee6ff", "tonalRamp": ["#05353d", "#0a5663", "#0f7a8b", "#18a3b9", "#2ee6ff", "#6df0ff", "#a1f6ff", "#d3fbff"] },
+      "paper": { "role": "neutral", "displayName": "Papel (seccion invertida)", "canonical": "#ede8df", "tonalRamp": ["#5c574e", "#8f8a80", "#a8a298", "#c9c2b4", "#cfc9be", "#ddd8ce", "#e6e1d8", "#ede8df"] },
+      "ink": { "role": "neutral", "displayName": "Tinta", "canonical": "#0b0b0a", "tonalRamp": ["#0b0b0a", "#141412", "#1e1d1a", "#2a2925", "#3a3833", "#4a4741", "#5c574e", "#8f8a80"] },
+      "mute-ink": { "role": "neutral", "displayName": "Apagado sobre papel", "canonical": "#5c574e", "tonalRamp": ["#1e1d1a", "#2a2925", "#3a3833", "#4a4741", "#5c574e", "#74706a", "#8f8a80", "#c9c2b4"] },
+      "line-ink": { "role": "neutral", "displayName": "Linea sobre papel", "canonical": "#c9c2b4", "tonalRamp": ["#5c574e", "#8f8a80", "#a8a298", "#b8b1a4", "#c9c2b4", "#d6d0c4", "#e3ded4", "#ede8df"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display section", "purpose": "Titulos de seccion en Anton, mayuscula." },
+      "display-hero": { "displayName": "Display hero", "purpose": "Nombre a todo el ancho en el hero (y titulo final a 21.5vw)." },
+      "display-card": { "displayName": "Display card", "purpose": "Titulos de tarjeta, formulario y cifras del panel." },
+      "body": { "displayName": "Body", "purpose": "Parrafos en JetBrains Mono 16px/1.7." },
+      "body-sm": { "displayName": "Body small", "purpose": "Texto de tarjetas, listas y filas." },
+      "label": { "displayName": "Label", "purpose": "Rotulos, metadatos y cabeceras de columna; piso de 13px." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrada, presionado, apertura de filas, campo estatico. Equivale a expo.out en GSAP." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Movimientos de ida y vuelta." },
+      { "name": "duration-color", "value": "150ms", "purpose": "Color y fondo de botones y enlaces." },
+      { "name": "duration-press", "value": "160ms", "purpose": "Escala 0.97 al presionar." },
+      { "name": "duration-fade-in", "value": "200ms", "purpose": "Contenido que llega tarde; retraso 45ms por indice." },
+      { "name": "duration-accordion", "value": "220ms open / 160ms close", "purpose": "Fila expandible de servicios." },
+      { "name": "duration-glitch", "value": "400ms", "purpose": "Rafaga de glitch del titulo del hero." },
+      { "name": "duration-static-noise", "value": "700ms", "purpose": "Desvanecimiento del campo estatico." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Boton acento",
+      "kind": "button",
+      "refersTo": "button-acid",
+      "description": "Accion principal: fondo acido, texto casi negro, sin radio.",
+      "html": "<button class=\"ds-btn-acid\">Cotizar</button>",
+      "css": ".ds-btn-acid { min-height: 2.75rem; padding: 0 1.25rem; background: var(--acid, #c6ff3d); color: var(--bg, #0b0b0a); font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 700; border: 0; border-radius: 0; cursor: pointer; transition: background-color 150ms ease, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-acid:hover { background: var(--fg, #ede8df); } .ds-btn-acid:focus-visible { outline: 2px solid #c6ff3d; outline-offset: 3px; } .ds-btn-acid:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Campo de formulario",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Campo plano con borde line-2 que se vuelve acido al enfocar.",
+      "html": "<div style=\"background:#141412;padding:16px;\"><label class=\"ds-label\" for=\"ds-f\">Contacto</label><input id=\"ds-f\" class=\"ds-field\" type=\"text\"></div>",
+      "css": ".ds-label { display: block; font-size: 0.9375rem; color: #cfc9be; font-family: 'JetBrains Mono', monospace; } .ds-field { display: block; width: 100%; min-height: 2.75rem; margin-top: 6px; padding: 8px 12px; background: #0b0b0a; color: #ede8df; border: 1px solid #3a3833; border-radius: 0; font: inherit; transition: border-color 150ms ease; box-sizing: border-box; } .ds-field:focus { border-color: #c6ff3d; outline: none; } .ds-field:focus-visible { outline: 2px solid #c6ff3d; outline-offset: 2px; }"
+    },
+    {
+      "name": "Cabecera con indicador de ruido",
+      "kind": "nav",
+      "refersTo": "colors.acid",
+      "description": "Barra fija con logo, indicador [ RUIDO NNN% ] y conmutador ES/EN.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-logo\" href=\"#\">ALEJO.DATA</a><p class=\"ds-noise\">[ RUIDO <span>072</span>% ]</p><div class=\"ds-lang\"><button class=\"ds-lang-on\">ES</button><button class=\"ds-lang-off\">EN</button></div></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 48px; padding: 0 24px; background: #0b0b0a; color: #ede8df; border-bottom: 1px solid #2a2925; font-family: 'JetBrains Mono', monospace; font-size: 0.9375rem; } .ds-logo { font-weight: 700; letter-spacing: 0.05em; color: inherit; text-decoration: none; } .ds-noise { margin: 0; font-variant-numeric: tabular-nums; } .ds-noise span { color: #c6ff3d; } .ds-lang button { min-width: 40px; min-height: 40px; border: 0; border-radius: 0; font: inherit; text-transform: uppercase; cursor: pointer; } .ds-lang-on { background: #c6ff3d; color: #0b0b0a; } .ds-lang-off { background: transparent; color: #8f8a80; } .ds-lang-off:hover { color: #ede8df; } .ds-lang button:focus-visible { outline: 2px solid #c6ff3d; outline-offset: 3px; }"
+    },
+    {
+      "name": "Fila de servicio",
+      "kind": "custom",
+      "refersTo": "service-row-open",
+      "description": "Fila expandible: nombre llano, termino tecnico, precio en Anton y marcador acido.",
+      "html": "<div class=\"ds-row\"><button class=\"ds-row-btn\"><span><span class=\"ds-row-name\">Tablero de seguimiento</span><span class=\"ds-row-tech\">Dashboard BI</span></span><span class=\"ds-row-price\">$ 900.000</span><span class=\"ds-row-plus\">+</span></button></div>",
+      "css": ".ds-row { border-top: 1px solid #2a2925; background: #0b0b0a; font-family: 'JetBrains Mono', monospace; } .ds-row-btn { display: grid; grid-template-columns: 1fr auto auto; gap: 24px; align-items: baseline; width: 100%; padding: 20px 12px; background: transparent; color: #ede8df; border: 0; border-radius: 0; text-align: left; font: inherit; cursor: pointer; transition: background-color 150ms ease; } .ds-row-btn:hover { background: #141412; } .ds-row-btn:focus-visible { outline: 2px solid #c6ff3d; outline-offset: -2px; } .ds-row-name { display: block; font-size: 1.125rem; } .ds-row-tech { display: block; margin-top: 4px; font-size: 0.8125rem; color: #8f8a80; } .ds-row-price { font-family: Anton, Impact, sans-serif; text-transform: uppercase; font-size: 1.5rem; line-height: 1; } .ds-row-plus { color: #c6ff3d; font-size: 1.125rem; }"
+    },
+    {
+      "name": "Tarjeta-dataset",
+      "kind": "card",
+      "refersTo": "card-dataset",
+      "description": "Articulo de borde fino con encabezado tipo archivo y etiqueta sintetico.",
+      "html": "<article class=\"ds-card\"><header class=\"ds-card-head\"><p>indicador.csv <span>· 8 filas</span></p><p class=\"ds-card-tag\">SINTETICO</p></header><div class=\"ds-card-body\"><h3>El indicador que mentia</h3><p>Texto breve que explica el caso.</p></div></article>",
+      "css": ".ds-card { border: 1px solid #3a3833; background: #141412; color: #ede8df; font-family: 'JetBrains Mono', monospace; } .ds-card-head { display: flex; justify-content: space-between; gap: 16px; padding: 8px 16px; background: #0b0b0a; border-bottom: 1px solid #3a3833; font-size: 0.8125rem; color: #cfc9be; } .ds-card-head p { margin: 0; } .ds-card-head span { color: #8f8a80; } .ds-card-tag { padding: 0 6px; border: 1px solid #3a3833; color: #8f8a80; } .ds-card-body { padding: 28px; } .ds-card-body h3 { margin: 0; font-family: Anton, Impact, sans-serif; font-weight: 400; text-transform: uppercase; font-size: 2.5rem; line-height: 0.96; } .ds-card-body p { margin: 12px 0 0; max-width: 56ch; font-size: 0.9375rem; color: #cfc9be; }"
+    },
+    {
+      "name": "Panel en vivo",
+      "kind": "custom",
+      "refersTo": "colors.surface",
+      "description": "Cifra Anton, barra de profundidad acida y linea de log con prompt.",
+      "html": "<div class=\"ds-panel\"><p class=\"ds-panel-label\">Visitas hoy</p><p class=\"ds-panel-num\">128</p><span class=\"ds-bar\"><span class=\"ds-bar-fill\"></span></span><p class=\"ds-log\"><span>&gt; </span>visita · CO · movil</p></div>",
+      "css": ".ds-panel { padding: 24px; background: #141412; border: 1px solid #3a3833; color: #ede8df; font-family: 'JetBrains Mono', monospace; } .ds-panel-label { margin: 0; font-size: 0.8125rem; color: #8f8a80; } .ds-panel-num { margin: 8px 0; font-family: Anton, Impact, sans-serif; font-size: 4rem; line-height: 1; } .ds-bar { display: block; height: 8px; background: #0b0b0a; outline: 1px solid #2a2925; outline-offset: -1px; overflow: hidden; } .ds-bar-fill { display: block; height: 100%; width: 100%; background: #c6ff3d; transform-origin: left; transform: scaleX(0.62); } .ds-log { margin: 16px 0 0; font-size: 0.9375rem; color: #cfc9be; } .ds-log span { color: #c6ff3d; }"
+    },
+    {
+      "name": "Enlace de seccion invertida",
+      "kind": "custom",
+      "refersTo": "invert-link",
+      "description": "Enlace sobre papel con filete de tinta que se invierte al pasar el puntero.",
+      "html": "<div class=\"ds-invert\"><a class=\"ds-invert-link\" href=\"#\">correo@ejemplo.com [PLACEHOLDER]</a></div>",
+      "css": ".ds-invert { background: #ede8df; color: #0b0b0a; padding: 32px; font-family: 'JetBrains Mono', monospace; } .ds-invert-link { display: block; padding: 16px 0; border-top: 1px solid #0b0b0a; color: inherit; font-size: 1.25rem; text-decoration: none; transition: background-color 150ms ease, color 150ms ease; } .ds-invert-link:hover { background: #0b0b0a; color: #ede8df; } .ds-invert-link:focus-visible { outline: 2px solid #0b0b0a; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Terminal que se Limpia",
+    "overview": "La pagina es el dato. Arranca como un campo de ruido (grano, lineas de escaneo, particulas de caracteres, titulo que se decodifica y hace glitch) y cada scroll lo vuelve señal: el indicador de cabecera baja de 100 % a 0 %, las particulas se ordenan y la ultima seccion se invierte a papel, quieta y legible. Lenguaje de consola: monoespaciada para todo salvo los titulos, rotulos tipo nombre de archivo, consultas con >, tablas y diagramas de bordes finos.\n\nDensidad alta pero respirada: texto claro sobre casi negro con interlineado 1.7, tarjetas planas separadas por lineas de 1px, titulos de Anton en mayuscula a escala de cartel. Sin curvas, sombras ni degradados; la profundidad es tonal y de borde. El movimiento es parte del mensaje y siempre desaparece con prefers-reduced-motion.",
+    "keyCharacteristics": [
+      "Un solo acido (#c6ff3d) sobre fondo oscuro; rosa/cian solo como efecto.",
+      "Anton en mayuscula muy grande para titulos; JetBrains Mono para todo lo demas.",
+      "Ceros radios, cero sombras; paneles de borde de 1px sobre superficie mas clara.",
+      "Grano y lineas de escaneo solo en el hero; seccion final invertida y quieta.",
+      "Datos sinteticos siempre rotulados; lo que falta se marca [PLACEHOLDER]."
+    ],
+    "rules": [
+      { "name": "The One Acid Rule", "body": "El acido es el unico acento y marca estado, accion o señal; si todo es acido, nada lo es.", "section": "colors" },
+      { "name": "The Effects-Only Glitch Rule", "body": "Rosa y cian pertenecen a efectos (glitch del titulo, particulas); jamas a elementos de interfaz.", "section": "colors" },
+      { "name": "The Paper Has No Acid Rule", "body": "En la seccion invertida el acento no se usa como texto; el estado activo se invierte a tinta sobre papel.", "section": "colors" },
+      { "name": "The Anton-Is-Display-Only Rule", "body": "Anton solo en mayuscula y solo para titulos y cifras grandes; nunca en cuerpo ni en etiquetas.", "section": "typography" },
+      { "name": "The Thirteen-Pixel Floor Rule", "body": "Ningun texto por debajo de 0.8125rem.", "section": "typography" },
+      { "name": "The Flat-Always Rule", "body": "Ni sombras, ni degradados decorativos, ni blur de fondo; separar con borde o con salto de tono.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar el acido (#c6ff3d) solo para accion, estado activo o señal, y siempre sobre fondo oscuro.",
+      "Do poner Anton en mayuscula para titulos y cifras grandes y JetBrains Mono para todo lo demas, con un minimo de 0.8125rem.",
+      "Do separar con filetes de 1px (line / line-2) y saltos de tono entre bg y surface.",
+      "Do rotular los datos sinteticos y marcar lo que falta como [PLACEHOLDER].",
+      "Do mostrar «—» cuando un dato no existe en lugar de inventarlo.",
+      "Do envolver todo efecto de scroll en matchMedia con prefers-reduced-motion: no-preference y mantener foco visible."
+    ],
+    "donts": [
+      "Don't usar radios, sombras ni degradados decorativos.",
+      "Don't usar el acido como texto sobre papel ni en la seccion invertida.",
+      "Don't usar rosa/cian fuera de efectos: el glitch de capas vive solo en el hero y los dos colores nunca van en interfaz.",
+      "Don't poner grano ni lineas de escaneo fuera del hero ni animar la seccion final.",
+      "Don't inventar datos, metricas, enlaces ni logos.",
+      "Don't usar Anton en minuscula o en cuerpo, ni tipos de sistema como cara de titulo."
+    ]
+  }
+}

@@ -25,6 +25,6 @@ STORY: el visitante entiende quién es Daniel y qué hace en el primer viewport,
 
 FIRST VIEWPORT: «DANIEL PÁEZ» en Anton a todo el ancho, <h1> real, con decodificación y glitch; subtítulo «Analista de datos y desarrollador. Saco señal del ruido.»; abajo a la izquierda un log que se escribe con problemas reales resueltos; arriba ALEJO.DATA, toggle ES/EN e indicador [ RUIDO 100% ]. Partículas de caracteres en caos detrás.
 
-FORM: brief fijado por el usuario (la dirección fijada gana al sorteo); posición en la lista: n/a; seed: none (unavailable).
+FORM: brief fijado por el usuario (la dirección fijada gana al sorteo); posición en la lista: n/a; seed:2923f1c83c0d9981 (dirección fijada por el brief del dueño; la tirada no se usó para elegir).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
