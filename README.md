@@ -1,5 +1,8 @@
 # RUIDO → SEÑAL
 
+[![Publicar en GitHub Pages](https://github.com/nieldro/RUIDO/actions/workflows/pages.yml/badge.svg)](https://github.com/nieldro/RUIDO/actions/workflows/pages.yml)
+[![Pruebas del backend](https://github.com/nieldro/RUIDO/actions/workflows/backend.yml/badge.svg)](https://github.com/nieldro/RUIDO/actions/workflows/backend.yml)
+
 Portafolio de **Daniel Páez** («Alejo»), analista de datos y desarrollador en Bogotá. El sitio empieza como ruido visual (glitch, partículas, estática) y cada scroll lo limpia hasta llegar a un contacto calmado. Un indicador `[ RUIDO XX% ]` baja de 100 a 0 a lo largo de la página: la metáfora de convertir datos desordenados en decisiones.
 
 El sitio es, a la vez, un proyecto: **el visitante es el dataset**. Su visita viaja del navegador a una API en FastAPI, se guarda en PostgreSQL y aparece en un panel en vivo.
