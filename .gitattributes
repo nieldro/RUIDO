@@ -1,0 +1,8 @@
+# Git normaliza los finales de línea en el repo (LF) y respeta los de cada sistema al descargar.
+* text=auto
+
+# Binarios: nunca se tocan ni se comparan como texto.
+*.png binary
+*.pdf binary
+*.ico binary
+*.woff2 binary
