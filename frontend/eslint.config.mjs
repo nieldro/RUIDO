@@ -10,6 +10,8 @@ const eslintConfig = defineConfig([
     // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
+    // Compilaciones alternativas (NEXT_DIST_DIR): son salida generada, no código fuente.
+    "out-*/**",
     "build/**",
     "next-env.d.ts",
   ]),
