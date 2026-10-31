@@ -54,6 +54,15 @@ npm run dev
 
 Sin `NEXT_PUBLIC_API_URL` el sitio funciona igual: el panel, el log y el chat muestran estados honestos de «sin conexión», y el formulario de cotización abre el correo con el mensaje ya escrito.
 
+### Comprobaciones
+
+```bash
+cd frontend && npm run lint && npm run typecheck && npm test   # 13 pruebas con Vitest
+cd backend && python -m pytest                                  # 86 pruebas
+```
+
+El CI corre lo mismo en cada push. Más detalle en [`docs/arquitectura.md`](docs/arquitectura.md), [`docs/despliegue.md`](docs/despliegue.md) y [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Publicar
 
 `npm run build` genera `frontend/out/` (HTML estático): sirve en nginx, Vercel o GitHub Pages. El backend es un contenedor (`backend/Dockerfile`) para Railway o Fly.io. Despliega **una sola instancia**: el rate limit, la caché de estadísticas y el SSE viven en memoria del proceso.
