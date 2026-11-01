@@ -51,7 +51,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ vars.API_URL }}
           NEXT_PUBLIC_N8N_ENABLED: ${{ vars.N8N_ENABLED }}
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: frontend/out
 
