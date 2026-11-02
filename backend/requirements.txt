@@ -5,5 +5,5 @@ sqlmodel==0.0.48
 SQLAlchemy==2.1.6
 psycopg[binary]==3.3.6
 pydantic==2.14.1
-pydantic-settings==2.16.1
+pydantic-settings==2.16.2
 httpx==0.28.1
